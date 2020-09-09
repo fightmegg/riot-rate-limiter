@@ -28,11 +28,10 @@
       - [extractRegion](#extractregion)
       - [extractMethod](#extractmethod)
       - [METHODS & HOST](#methods--host)
-  - [How does this library work?](#how-does-this-library-work)
-      - [What happens when l call .execute?](#what-happens-when-l-call-execute)
-      - [What exactly are the rate-limiters?](#what-exactly-are-the-rate-limiters)
-      - [How do you handle 429?](#how-do-you-handle-429)
+  - [Wiki](#wiki)
+  - [Testing](#testing)
   - [Upcoming Features](#upcoming-features)
+  - [Maintainers](#maintainers)
 
 ## Installation
 
@@ -84,6 +83,8 @@ This library uses [node-fetch](https://github.com/node-fetch/node-fetch) underne
 
 Any responses that are not 2xx or 429 will be thrown, and must be caught.
 
+We will **auto-retry** `429` responses, utilising the `Retry-After` header to respect the API.
+
 ```ts
 limiter.execute({
   url: RequestInfo,
@@ -97,7 +98,7 @@ This is a **map** of all of the rate-limiters created, we create at least 1 rate
 
 We use the library [Bottleneck](https://github.com/SGrondin/bottleneck) as our rate-limiter, which supports chaining rate-limiters, meaning that the parents rate-limiter is always respected by its children.
 
-You can access the **region** rate-limiters via: `limiter.rateLimiters[region].main` and you can access the method rate-limiters via: `limiter.rateLimiters[region][method].main`
+You can access the **region** rate-limiters via: `limiter.rateLimiters[region].main` and you can access the **method** rate-limiters via: `limiter.rateLimiters[region][method].main`
 
 ## Helpers
 
@@ -118,16 +119,16 @@ extractRegion("https://na1.api.riotgames.com/method"); // returns na1
 This can extract the method from your URL:
 
 ```ts
-import { extractRegion } from "@fightmegg/riot-rate-limiter";
+import { extractMethod } from "@fightmegg/riot-rate-limiter";
 
-extractRegion(
+extractMethod(
   "https://na1.api.riotgames.com/lol/champion-mastery/v4/scores/by-summoner/12345"
 ); // returns 'CHAMPION_MASTERY.GET_CHAMPION_MASTERY_SCORE'
 ```
 
 #### METHODS & HOST
 
-For those looking to build an `RiotGamesAPI` library ontop of this rate limiter, we export two object called [METHODS & HOST](). You can use these exports to create the URLs for you, as seen below:
+For those looking to build a `RiotGamesAPI` library ontop of this rate limiter, we export two object called [METHODS & HOST](https://github.com/fightmegg/riot-rate-limiter/blob/master/%40types/index.ts#L58). You can use these exports to create the URLs for you, as seen below:
 
 ```ts
 import { compile } from "path-to-regexp";
@@ -143,35 +144,24 @@ const url = `https://${createHost({ platformId: "euw1" })}${createPath({
 })}`;
 ```
 
-## How does this library work?
+## Wiki
 
-Please see the [wiki]() for an up-to-date list of questions and answers
+Please see the [wiki](https://github.com/fightmegg/riot-rate-limiter/wiki) for an up-to-date list of questions and answers
 
-#### What happens when l call .execute?
+## Testing
 
-In order to be fully transparent, we will try to explain exactly what this library does.
+Unit tests: `npm test __tests__/unit`
 
-1. When you first call `limiter.execute`, we process the request, and then on the response, we setup all of the rate-limiters, respecting the `X-Rate-...` headers provided by the API.
-2. Any subsequent calls to `limiter.execute` are then fully processed by the rate-limiters. We do this because we decided not to make a _ghost_ request, and to respect your given rate limits.
-
-#### What exactly are the rate-limiters?
-
-Each region or method may have multiple rate-limiters because Riot often return multiple limits on an API, e.g. `1:120,9000:1000`, which can mean 1 request every 120 seconds, and 9000 requests every 10 minutes.
-
-In order to tie these together, we decided to break each limit into its own rate-limiter. Hence why we chose the library [Bottleneck](https://github.com/SGrondin/bottleneck), as its a fully features and well tested rate-limiter, that also supports chaining rate-limiters, so that we can form a hierachy.
-
-So the hierarchy is: **App Rate Limiter** -> **Method Rate Limiter**.
-
-#### How do you handle 429?
-
-If a `429` is received, we automatically retry depending on a few things:
-
-1. Which rate-limit did we hit? Application? Method? Serivce? This tells use which rate-limiter should be in charge of the retry
-2. We then use the `Retry-After` header to determine when to retry next
-3. Finally we schedule the **retry** and also update all of our affected rate-limiters with the latest rate-limits from the headers present on the request that returned a `429`.
+E2E tests: `npm test __tests__/e2e`
 
 ## Upcoming Features
 
 - [ ] Improve documentation
+- [ ] Add more tests
 - [ ] Support Redis for multi-instance / cluster
 - [ ] Support Redis / Bottleneck options to be passed / overridden
+- [ ] Potentially look into interceptors
+
+## Maintainers
+
+[@olliejennings](https://github.com/olliejennings)
