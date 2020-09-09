@@ -7,7 +7,7 @@ import {
   RateLimits,
   METHODS,
   HOST,
-} from "../@types";
+} from "./@types";
 import { extractMethod, extractRegion } from "./extractor";
 import {
   createRateLimiters,

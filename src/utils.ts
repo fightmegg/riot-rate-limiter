@@ -1,6 +1,6 @@
 import Bottleneck from "bottleneck";
 import { Headers } from "node-fetch";
-import { LimitType, RateLimits } from "../@types";
+import { LimitType, RateLimits } from "./@types";
 
 const defaultRateLimiterOptions = {
   maxConcurrent: 1,

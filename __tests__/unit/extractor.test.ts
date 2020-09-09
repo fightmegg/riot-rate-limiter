@@ -1,5 +1,5 @@
 import { compile } from "path-to-regexp";
-import { PlatformId, METHODS, HOST } from "../../@types";
+import { PlatformId, METHODS, HOST } from "../../src/@types";
 import { extractRegion, extractMethod } from "../../src/extractor";
 
 describe("Extractor", () => {

@@ -1,7 +1,7 @@
 import { Substitute } from "@fluffy-spoon/substitute";
 import Bottleneck from "bottleneck";
 import { mocked } from "ts-jest/utils";
-import { LimitType } from "../../@types";
+import { LimitType } from "../../src/@types";
 import {
   createRateLimiters,
   createRateLimitRetry,

@@ -21,7 +21,7 @@
     "resolveJsonModule": true,
     "moduleResolution": "node"
   },
-  "include": ["./src"],
+  "include": ["./src", "./@types"],
   "exclude": ["**/__tests__/**"],
   "ts-node": {
     "compilerOptions": {

@@ -1,5 +1,5 @@
 import Bottleneck from "bottleneck";
-import { LimitType } from "../@types";
+import { LimitType } from "./@types";
 import { chainRateLimiters, createRateLimiterOptions } from "./utils";
 
 export const createRateLimiters = (
