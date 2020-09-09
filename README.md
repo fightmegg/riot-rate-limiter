@@ -1,5 +1,9 @@
 # Riot Rate Limiter
 
+[![Version](https://img.shields.io/npm/v/@fightmegg/riot-rate-limiter.svg)](https://www.npmjs.com/package/@fightmegg/riot-rate-limiter)
+[![Downloads](https://img.shields.io/npm/dm/@fightmegg/riot-rate-limiter.svg)](https://www.npmjs.com/package/@fightmegg/riot-rate-limiter)
+[![CircleCI](https://circleci.com/gh/fightmegg/riot-rate-limiter/tree/master.svg?style=svg)](https://circleci.com/gh/fightmegg/riot-rate-limiter/tree/master)
+
 > Node.JS Rate Limiter for [Riot Games API](https://developer.riotgames.com)
 
 ### What this library is not
@@ -28,6 +32,7 @@
       - [extractRegion](#extractregion)
       - [extractMethod](#extractmethod)
       - [METHODS & HOST](#methods--host)
+  - [Debugging](#debugging)
   - [Wiki](#wiki)
   - [Testing](#testing)
   - [Upcoming Features](#upcoming-features)
@@ -144,6 +149,14 @@ const url = `https://${createHost({ platformId: "euw1" })}${createPath({
 })}`;
 ```
 
+## Debugging
+
+If you want to see want the rate-limiter is currently doing, we use the [debug]() module for logging. Simply run your app with:
+
+```shell
+DEBUG=riotratelimiter* node ...
+```
+
 ## Wiki
 
 Please see the [wiki](https://github.com/fightmegg/riot-rate-limiter/wiki) for an up-to-date list of questions and answers
@@ -158,6 +171,7 @@ E2E tests: `npm test __tests__/e2e`
 
 - [ ] Improve documentation
 - [ ] Add more tests
+- [ ] Improve debugging
 - [ ] Support Redis for multi-instance / cluster
 - [ ] Support Redis / Bottleneck options to be passed / overridden
 - [ ] Potentially look into interceptors
