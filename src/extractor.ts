@@ -1,6 +1,6 @@
 import { Key, pathToRegexp } from "path-to-regexp";
 import { RequestInfo } from "node-fetch";
-import { PlatformId, HOST, METHODS } from "../@types";
+import { PlatformId, HOST, METHODS } from "./@types";
 
 const matchPath = (path: string, url: string) => {
   const keys: Key[] = [];

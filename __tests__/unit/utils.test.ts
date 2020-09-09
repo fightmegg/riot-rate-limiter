@@ -1,6 +1,6 @@
 import { Headers } from "node-fetch";
 import { Substitute } from "@fluffy-spoon/substitute";
-import { LimitType } from "../../@types";
+import { LimitType } from "../../src/@types";
 import {
   toNumber,
   secsToMs,
