@@ -119,9 +119,9 @@ extractRegion("https://na1.api.riotgames.com/method"); // returns na1
 This can extract the method from your URL:
 
 ```ts
-import { extractRegion } from "@fightmegg/riot-rate-limiter";
+import { extractMethod } from "@fightmegg/riot-rate-limiter";
 
-extractRegion(
+extractMethod(
   "https://na1.api.riotgames.com/lol/champion-mastery/v4/scores/by-summoner/12345"
 ); // returns 'CHAMPION_MASTERY.GET_CHAMPION_MASTERY_SCORE'
 ```
