@@ -151,7 +151,7 @@ const url = `https://${createHost({ platformId: "euw1" })}${createPath({
 
 ## Debugging
 
-If you want to see want the rate-limiter is currently doing, we use the [debug]() module for logging. Simply run your app with:
+If you want to see want the rate-limiter is currently doing, we use the [debug](https://github.com/visionmedia/debug) module for logging. Simply run your app with:
 
 ```shell
 DEBUG=riotratelimiter* node ...
