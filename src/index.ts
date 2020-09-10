@@ -12,6 +12,7 @@ import { extractMethod, extractRegion } from "./extractor";
 import {
   createRateLimiters,
   createRateLimitRetry,
+  synchronizeRateLimiters,
   updateRateLimiters,
 } from "./rate-limiter";
 import { request } from "./request";
@@ -86,13 +87,36 @@ export class RiotRateLimiter {
         { limits: rateLimits.appLimits, counts: rateLimits.appCounts }
       );
     }
-    if (this.rateLimiters[region][method]) {
+    if (this.rateLimiters[region]?.[method]) {
       debug("Updating rateLimiter for", region, method);
       this.rateLimiters[region][method].limiters = updateRateLimiters(
         this.rateLimiters[region][method].limiters,
         { limits: rateLimits.methodLimits, counts: rateLimits.methodCounts }
       );
     }
+  }
+
+  private async syncRateLimiters(
+    region: PlatformId,
+    method: string,
+    rateLimits: RateLimits
+  ): Promise<void> {
+    if (this.rateLimiters[region]?.[method]) {
+      this.rateLimiters[region].limiters = await synchronizeRateLimiters(
+        this.rateLimiters[region].limiters,
+        { limits: rateLimits.appLimits, counts: rateLimits.appCounts },
+        this.rateLimiters[region][method].main.counts()
+      );
+
+      this.rateLimiters[region][
+        method
+      ].limiters = await synchronizeRateLimiters(
+        this.rateLimiters[region][method].limiters,
+        { limits: rateLimits.methodLimits, counts: rateLimits.methodCounts },
+        this.rateLimiters[region][method].main.counts()
+      );
+    }
+    return;
   }
 
   async execute(req: ExecuteParameters): Promise<any> {
@@ -124,7 +148,9 @@ export class RiotRateLimiter {
       request(req)
         .then(({ rateLimits, json }) => {
           this.setupRateLimiters(region, method, rateLimits);
-          resolve(json);
+          this.syncRateLimiters(region, method, rateLimits).finally(() =>
+            resolve(json)
+          );
         })
         .catch(
           ({
