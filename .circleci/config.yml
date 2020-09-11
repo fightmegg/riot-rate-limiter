@@ -107,7 +107,7 @@ jobs:
           at: .
       - run:
           name: Running E2E Tests
-          command: npm test:e2e -- --ci --runInBand --reporters=default
+          command: npm run test:e2e -- --ci --runInBand --reporters=default
 
   prettier:
     <<: *js_defaults
