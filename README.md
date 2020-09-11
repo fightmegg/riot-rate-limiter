@@ -6,36 +6,35 @@
 
 > Node.JS Rate Limiter for [Riot Games API](https://developer.riotgames.com)
 
-### What this library is not
+#### **[Wiki](https://github.com/fightmegg/riot-rate-limiter/wiki)**
 
-- An API for interfacing with the Riot Games API
-- Interfacing with non rate-limited endpoints
+### Features
 
-### What this library is
-
-- A low level rate-limiter specifically built for [Riot Games Rate Limiting](https://web.archive.org/web/20190629194440/https://developer.riotgames.com/rate-limiting.html)
-- A **spread** based rate-limiter
+- 100% Endpoint coverage
+- **Spread** based rate-limiter
+- [Request synchronization](https://github.com/fightmegg/riot-rate-limiter/wiki/Request-Synchronization)
+- [Request prioritization](https://github.com/fightmegg/riot-rate-limiter/wiki/Request-Priorities)
+- [429 response](https://github.com/fightmegg/riot-rate-limiter/wiki/429-Reponses) retrying
+- Built specifically for [Riot Games Rate Limiting](https://web.archive.org/web/20190629194440/https://developer.riotgames.com/rate-limiting.html)
 
 ## Contents
 
-- [Riot Rate Limiter](#riot-rate-limiter)
-    - [What this library is not](#what-this-library-is-not)
-    - [What this library is](#what-this-library-is)
+- [Riot Rate Limiter](#riot-rate-limiter)  
+   - [**Wiki**](#wiki)
+  - [Features](#features)
   - [Contents](#contents)
   - [Installation](#installation)
   - [Usage](#usage)
   - [Endpoints Covered](#endpoints-covered)
   - [API](#api)
-      - [`.execute`](#execute)
-      - [`.rateLimiters`](#ratelimiters)
+    - [`.execute`](#execute)
+    - [`.rateLimiters`](#ratelimiters)
   - [Helpers](#helpers)
-      - [extractRegion](#extractregion)
-      - [extractMethod](#extractmethod)
-      - [METHODS & HOST](#methods--host)
+    - [extractRegion](#extractregion)
+    - [extractMethod](#extractmethod)
+    - [METHODS & HOST](#methods--host)
   - [Debugging](#debugging)
-  - [Wiki](#wiki)
   - [Testing](#testing)
-  - [Upcoming Features](#upcoming-features)
   - [Maintainers](#maintainers)
 
 ## Installation
@@ -94,8 +93,12 @@ We will **auto-retry** `429` responses, utilising the `Retry-After` header to re
 limiter.execute({
   url: RequestInfo,
   options: RequestInit,
-});
+},
+  jobOptions?: Bottleneck.JobOptions
+);
 ```
+
+The second argument is an optional, which allows you to specify [JobOptions](https://github.com/SGrondin/bottleneck#job-options) such as job priority and unique ID for log identification. The weight of a job cannot be changed from the value of `1` no matter what you pass in.
 
 #### `.rateLimiters`
 
@@ -157,24 +160,11 @@ If you want to see want the rate-limiter is currently doing, we use the [debug](
 DEBUG=riotratelimiter* node ...
 ```
 
-## Wiki
-
-Please see the [wiki](https://github.com/fightmegg/riot-rate-limiter/wiki) for an up-to-date list of questions and answers
-
 ## Testing
 
-Unit tests: `npm test __tests__/unit`
+Unit tests: `npm test`
 
-E2E tests: `npm test __tests__/e2e`
-
-## Upcoming Features
-
-- [ ] Improve documentation
-- [ ] Add more tests
-- [ ] Improve debugging
-- [ ] Support Redis for multi-instance / cluster
-- [ ] Support Redis / Bottleneck options to be passed / overridden
-- [ ] Potentially look into interceptors
+E2E tests: `npm run test:e2e`
 
 ## Maintainers
 
