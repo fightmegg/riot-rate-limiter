@@ -18,7 +18,6 @@ export interface ExecuteRequestParameters {
   req: ExecuteParameters;
   region: PlatformId;
   method: string;
-  retries?: number;
 }
 
 export enum PlatformId {
