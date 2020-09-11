@@ -1,3 +1,4 @@
+import "jest-extended";
 import {
   RiotRateLimiter,
   extractMethod,
@@ -49,8 +50,15 @@ describe("@fightmegg/riot-rate-limtier", () => {
     });
 
     test("initialization sets default class variables", () => {
-      expect(limiter.debug).toBeFalse();
+      expect(limiter.configuration.debug).toBeFalse();
+      expect(limiter.configuration.concurrency).toEqual(1);
       expect(limiter.rateLimiters).toEqual({});
+    });
+
+    test("initialization overrides default class variables if passed in", () => {
+      const r = new RiotRateLimiter({ debug: true, concurrency: 10 });
+      expect(r.configuration.debug).toBeTrue();
+      expect(r.configuration.concurrency).toEqual(10);
     });
 
     test("should THROW if unsupported region", async () => {

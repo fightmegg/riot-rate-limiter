@@ -19,20 +19,20 @@
 
 ## Contents
 
-- [Riot Rate Limiter](#riot-rate-limiter)  
-   - [**Wiki**](#wiki)
-  - [Features](#features)
+- [Riot Rate Limiter](#riot-rate-limiter)
+      - [**Wiki**](#wiki)
+    - [Features](#features)
   - [Contents](#contents)
   - [Installation](#installation)
   - [Usage](#usage)
   - [Endpoints Covered](#endpoints-covered)
   - [API](#api)
-    - [`.execute`](#execute)
-    - [`.rateLimiters`](#ratelimiters)
+      - [`.execute`](#execute)
+      - [`.rateLimiters`](#ratelimiters)
   - [Helpers](#helpers)
-    - [extractRegion](#extractregion)
-    - [extractMethod](#extractmethod)
-    - [METHODS & HOST](#methods--host)
+      - [extractRegion](#extractregion)
+      - [extractMethod](#extractmethod)
+      - [METHODS & HOST](#methods--host)
   - [Debugging](#debugging)
   - [Testing](#testing)
   - [Maintainers](#maintainers)
@@ -98,7 +98,7 @@ limiter.execute({
 );
 ```
 
-The second argument is an optional, which allows you to specify [JobOptions](https://github.com/SGrondin/bottleneck#job-options) such as job priority and unique ID for log identification. The weight of a job cannot be changed from the value of `1` no matter what you pass in.
+The second argument is optional, which allows you to specify [JobOptions](https://github.com/SGrondin/bottleneck#job-options) such as job priority and unique ID for log identification. The weight of a job cannot be changed from the value of `1` no matter what you pass in.
 
 #### `.rateLimiters`
 

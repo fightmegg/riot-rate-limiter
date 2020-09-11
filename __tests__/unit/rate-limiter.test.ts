@@ -82,7 +82,10 @@ describe("rate-limiter", () => {
 
       const rateLimits = { limits: "10,1", counts: "10,1" };
 
-      const rls = createRateLimiters(rateLimits, "euw");
+      const rls = createRateLimiters(rateLimits, {
+        id: "euw",
+        maxConcurrent: 2,
+      });
       expect(rls.main).toBeInstanceOf(Bottleneck);
       expect(rls.limiters).toHaveLength(2);
       expect(rls.main).toEqual(rls.limiters?.[0]);
@@ -90,13 +93,13 @@ describe("rate-limiter", () => {
         1,
         "10",
         "10",
-        { id: "euw_0" }
+        { id: "euw_0", maxConcurrent: 2 }
       );
       expect(mockedCreateRateLimiterOptions).toHaveBeenNthCalledWith(
         2,
         "1",
         "1",
-        { id: "euw_1" }
+        { id: "euw_1", maxConcurrent: 2 }
       );
       expect(mockedChainRateLimiters).toHaveBeenCalledWith(rls.limiters);
     });

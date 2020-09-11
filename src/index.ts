@@ -25,11 +25,20 @@ const debugQ = require("debug")("riotratelimiter:queue");
 export { extractMethod, extractRegion, METHODS, HOST };
 
 export class RiotRateLimiter {
-  readonly debug: boolean = false;
+  readonly configuration: ConstructorParams = {
+    debug: false,
+    concurrency: 1,
+  };
   readonly rateLimiters: { [key: string]: any } = {};
 
-  constructor({ debug = false }: ConstructorParams = {}) {
-    this.debug = debug;
+  constructor(config: ConstructorParams = {}) {
+    this.configuration = { ...this.configuration, ...config };
+    this.checkConcurrency();
+  }
+
+  private checkConcurrency() {
+    if (this.configuration.concurrency && this.configuration.concurrency > 10)
+      console.warn("Concurrency > 10 is quite high, be careful!");
   }
 
   private setupRateLimiters(
@@ -44,13 +53,14 @@ export class RiotRateLimiter {
           limits: rateLimits.appLimits,
           counts: rateLimits.appCounts,
         },
-        region
+        { id: region, maxConcurrent: this.configuration.concurrency }
       );
       this.rateLimiters[region].main.on(
         "failed",
         createRateLimitRetry([LimitType.APPLICATION])
       );
     }
+
     if (!this.rateLimiters[region]?.[method] && rateLimits.methodLimits) {
       debug("Setting up rateLimiter for", region, method);
       this.rateLimiters[region][method] = createRateLimiters(
@@ -58,7 +68,10 @@ export class RiotRateLimiter {
           limits: rateLimits.methodLimits,
           counts: rateLimits.methodCounts,
         },
-        `${region}_${method}}`
+        {
+          id: `${region}_${method}`,
+          maxConcurrent: this.configuration.concurrency,
+        }
       );
       this.rateLimiters[region][method].main.on(
         "failed",

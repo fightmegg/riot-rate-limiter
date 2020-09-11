@@ -4,6 +4,7 @@ import { RequestInfo, RequestInit } from "node-fetch";
 export interface ConstructorParams {
   debug?: boolean;
   redis?: Bottleneck.RedisConnectionOptions;
+  concurrency?: number;
 }
 
 export interface ExecuteParameters {
