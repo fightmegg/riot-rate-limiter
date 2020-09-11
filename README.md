@@ -84,7 +84,7 @@ limiter
 new RiotRateLimiter({
   debug: boolean = false,
   concurrency: number = 1,
-  retryAfterDefault: number = 4000,
+  retryAfterDefault: number = 5000,
   retryCount: number = 4,
 });
 ```
