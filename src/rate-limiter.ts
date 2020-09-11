@@ -52,3 +52,38 @@ export const updateRateLimiters = (
     return limiter;
   });
 };
+
+export const synchronizeRateLimiters = async (
+  rateLimiters: Bottleneck[],
+  rateLimits: { limits: string; counts: string },
+  methodCounts: Bottleneck.Counts
+): Promise<Bottleneck[]> => {
+  const { limits, counts } = rateLimits;
+  const limitsArr = limits.split(",");
+  const countsArr = counts.split(",");
+  const requestsInFlight = methodCounts.EXECUTING;
+
+  return Promise.all(
+    rateLimiters.map(
+      async (limiter: Bottleneck, index): Promise<Bottleneck> => {
+        const currentReservoir = await limiter.currentReservoir();
+        if (!currentReservoir) return limiter;
+
+        const newRateLimits = createRateLimiterOptions(
+          limitsArr[index],
+          countsArr[index]
+        );
+        const rateLimitsLeftFromRiot =
+          (newRateLimits.reservoirRefreshAmount || 0) -
+          (newRateLimits.reservoir || 0);
+
+        const newReservoir = Math.min(
+          currentReservoir,
+          rateLimitsLeftFromRiot - requestsInFlight
+        );
+        limiter.updateSettings({ reservoir: newReservoir });
+        return limiter;
+      }
+    )
+  );
+};

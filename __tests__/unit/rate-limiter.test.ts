@@ -6,6 +6,7 @@ import {
   createRateLimiters,
   createRateLimitRetry,
   updateRateLimiters,
+  synchronizeRateLimiters,
 } from "../../src/rate-limiter";
 import { createRateLimiterOptions, chainRateLimiters } from "../../src/utils";
 
@@ -98,6 +99,74 @@ describe("rate-limiter", () => {
         { id: "euw_1" }
       );
       expect(mockedChainRateLimiters).toHaveBeenCalledWith(rls.limiters);
+    });
+  });
+
+  describe("synchronizeRateLimiters", () => {
+    test("it should not parse the rateLimits from Riot if current reservoir is empty", async () => {
+      const rateLimiter = Substitute.for<Bottleneck>();
+      const rateLimits = { limits: "100:10", counts: "9:10" };
+      const counts = { EXECUTING: 0 } as Bottleneck.Counts;
+      rateLimiter.currentReservoir().resolves(0);
+
+      const rl = await synchronizeRateLimiters(
+        [rateLimiter],
+        rateLimits,
+        counts
+      );
+
+      expect(rl).toEqual([rateLimiter]);
+      expect(mockedCreateRateLimiterOptions).not.toHaveBeenCalled();
+      rateLimiter.received().currentReservoir();
+    });
+
+    test("it should not update the reservoir limits if the API returns higher limits", async () => {
+      mockedCreateRateLimiterOptions.mockReturnValue({
+        reservoirRefreshAmount: 100,
+        reservoir: 3,
+      });
+      const rateLimiter = Substitute.for<Bottleneck>();
+      const rateLimits = { limits: "100:10", counts: "3:10" };
+      const counts = { EXECUTING: 0 } as Bottleneck.Counts;
+      rateLimiter.currentReservoir().resolves(5);
+
+      await synchronizeRateLimiters([rateLimiter], rateLimits, counts);
+
+      expect(mockedCreateRateLimiterOptions).toHaveBeenCalledWith(
+        "100:10",
+        "3:10"
+      );
+      rateLimiter.received().updateSettings({ reservoir: 5 });
+    });
+
+    test("it should update the reservoir limits if the API returns lower limits", async () => {
+      mockedCreateRateLimiterOptions.mockReturnValue({
+        reservoirRefreshAmount: 10,
+        reservoir: 7,
+      });
+      const rateLimiter = Substitute.for<Bottleneck>();
+      const rateLimits = { limits: "10:10", counts: "7:10" };
+      const counts = { EXECUTING: 0 } as Bottleneck.Counts;
+      rateLimiter.currentReservoir().resolves(5);
+
+      await synchronizeRateLimiters([rateLimiter], rateLimits, counts);
+
+      rateLimiter.received().updateSettings({ reservoir: 3 });
+    });
+
+    test("it should update the reservoir limits if we have many requests inflight", async () => {
+      mockedCreateRateLimiterOptions.mockReturnValue({
+        reservoirRefreshAmount: 10,
+        reservoir: 3,
+      });
+      const rateLimiter = Substitute.for<Bottleneck>();
+      const rateLimits = { limits: "10:10", counts: "3:10" };
+      const counts = { EXECUTING: 5 } as Bottleneck.Counts;
+      rateLimiter.currentReservoir().resolves(5);
+
+      await synchronizeRateLimiters([rateLimiter], rateLimits, counts);
+
+      rateLimiter.received().updateSettings({ reservoir: 2 });
     });
   });
 });
