@@ -39,7 +39,7 @@ export const createRateLimitRetry = (
   if (err.status === 429) {
     if (Array.isArray(limitType) && limitType.includes(err.limitType))
       return err.retryAfter;
-    else return retryAfterDefault;
+    else return err.retryAfter || retryAfterDefault;
   }
 };
 
