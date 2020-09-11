@@ -28,6 +28,14 @@ export const createRateLimiterOptions = (
   };
 };
 
+export const createJobOptions = (
+  options: Bottleneck.JobOptions = {}
+): Bottleneck.JobOptions => ({
+  id: String(Date.now()),
+  ...options,
+  weight: 1,
+});
+
 export const chainRateLimiters = (rl: Bottleneck[]) => {
   for (let i = rl.length - 1; i >= 0; i--) {
     if (rl[i - 1]) rl[i - 1].chain(rl[i]);

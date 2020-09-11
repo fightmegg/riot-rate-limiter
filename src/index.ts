@@ -17,6 +17,7 @@ import {
   updateRateLimiters,
 } from "./rate-limiter";
 import { request } from "./request";
+import { createJobOptions } from "./utils";
 
 const debug = require("debug")("riotratelimiter:main");
 const debugQ = require("debug")("riotratelimiter:queue");
@@ -120,16 +121,6 @@ export class RiotRateLimiter {
     return;
   }
 
-  private createJobOptions(
-    options: Bottleneck.JobOptions = {}
-  ): Bottleneck.JobOptions {
-    return {
-      id: String(Date.now()),
-      ...options,
-      weight: 1,
-    };
-  }
-
   async execute(
     req: ExecuteParameters,
     jobOptions?: Bottleneck.JobOptions
@@ -147,11 +138,11 @@ export class RiotRateLimiter {
       debug("No limiters setup yet, sending inital request");
       return this.executeRequest(
         { req, region, method },
-        this.createJobOptions(jobOptions)
+        createJobOptions(jobOptions)
       );
     }
 
-    return limiter.main.schedule(this.createJobOptions(jobOptions), () =>
+    return limiter.main.schedule(createJobOptions(jobOptions), () =>
       this.executeRequest({ req, region, method })
     );
   }
