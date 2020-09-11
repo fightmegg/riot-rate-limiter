@@ -52,13 +52,22 @@ describe("@fightmegg/riot-rate-limtier", () => {
     test("initialization sets default class variables", () => {
       expect(limiter.configuration.debug).toBeFalse();
       expect(limiter.configuration.concurrency).toEqual(1);
+      expect(limiter.configuration.retryAfterDefault).toEqual(5000);
+      expect(limiter.configuration.retryCount).toEqual(4);
       expect(limiter.rateLimiters).toEqual({});
     });
 
     test("initialization overrides default class variables if passed in", () => {
-      const r = new RiotRateLimiter({ debug: true, concurrency: 10 });
+      const r = new RiotRateLimiter({
+        debug: true,
+        concurrency: 10,
+        retryAfterDefault: 2000,
+        retryCount: 2,
+      });
       expect(r.configuration.debug).toBeTrue();
       expect(r.configuration.concurrency).toEqual(10);
+      expect(r.configuration.retryAfterDefault).toEqual(2000);
+      expect(r.configuration.retryCount).toEqual(2);
     });
 
     test("should THROW if unsupported region", async () => {

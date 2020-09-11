@@ -25,9 +25,16 @@ const debugQ = require("debug")("riotratelimiter:queue");
 export { extractMethod, extractRegion, METHODS, HOST };
 
 export class RiotRateLimiter {
-  readonly configuration: ConstructorParams = {
+  readonly configuration: {
+    debug: boolean;
+    concurrency: number;
+    retryAfterDefault: number;
+    retryCount: number;
+  } = {
     debug: false,
     concurrency: 1,
+    retryAfterDefault: 5000,
+    retryCount: 4,
   };
   readonly rateLimiters: { [key: string]: any } = {};
 
@@ -37,7 +44,7 @@ export class RiotRateLimiter {
   }
 
   private checkConcurrency() {
-    if (this.configuration.concurrency && this.configuration.concurrency > 10)
+    if (this.configuration.concurrency > 10)
       console.warn("Concurrency > 10 is quite high, be careful!");
   }
 
@@ -57,7 +64,11 @@ export class RiotRateLimiter {
       );
       this.rateLimiters[region].main.on(
         "failed",
-        createRateLimitRetry([LimitType.APPLICATION])
+        createRateLimitRetry(
+          [LimitType.APPLICATION],
+          this.configuration.retryAfterDefault,
+          this.configuration.retryCount
+        )
       );
     }
 
@@ -75,7 +86,11 @@ export class RiotRateLimiter {
       );
       this.rateLimiters[region][method].main.on(
         "failed",
-        createRateLimitRetry([LimitType.METHOD, LimitType.SERVICE])
+        createRateLimitRetry(
+          [LimitType.METHOD, LimitType.SERVICE],
+          this.configuration.retryAfterDefault,
+          this.configuration.retryCount
+        )
       );
 
       // TEMP DEBUG
@@ -198,10 +213,15 @@ export class RiotRateLimiter {
               resolve(
                 this.rateLimiters[region][method].main.schedule(
                   jobOptions,
-                  () => this.executeRequest({ req, region, method })
+                  () =>
+                    this.executeRequest({
+                      req,
+                      region,
+                      method,
+                    })
                 )
               );
-            }, rateLimits.retryAfter || 5000);
+            }, rateLimits.retryAfter || this.configuration.retryAfterDefault);
           }
         );
     });

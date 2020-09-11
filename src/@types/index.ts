@@ -5,6 +5,8 @@ export interface ConstructorParams {
   debug?: boolean;
   redis?: Bottleneck.RedisConnectionOptions;
   concurrency?: number;
+  retryAfterDefault?: number;
+  retryCount?: number;
 }
 
 export interface ExecuteParameters {
@@ -16,6 +18,7 @@ export interface ExecuteRequestParameters {
   req: ExecuteParameters;
   region: PlatformId;
   method: string;
+  retries?: number;
 }
 
 export enum PlatformId {
