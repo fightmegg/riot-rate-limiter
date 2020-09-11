@@ -7,6 +7,7 @@ import {
   extractRateLimits,
   createRateLimiterOptions,
   chainRateLimiters,
+  createJobOptions,
 } from "../../src/utils";
 import Bottleneck from "bottleneck";
 
@@ -136,6 +137,27 @@ describe("Utils", () => {
         reservoirRefreshAmount: 100,
         reservoirRefreshInterval: 20000,
         minTime: 200,
+      });
+    });
+  });
+
+  describe("createJobOptions", () => {
+    test("it should return default options if given none", () => {
+      expect(createJobOptions()).toEqual({ id: expect.any(String), weight: 1 });
+    });
+
+    test("it should return options with id and priority", () => {
+      expect(createJobOptions({ id: "1", priority: 4 })).toEqual({
+        id: "1",
+        priority: 4,
+        weight: 1,
+      });
+    });
+
+    test("it should not allow user to override the weight of a job", () => {
+      expect(createJobOptions({ weight: 5 })).toEqual({
+        id: expect.any(String),
+        weight: 1,
       });
     });
   });

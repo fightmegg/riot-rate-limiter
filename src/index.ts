@@ -1,3 +1,4 @@
+import Bottleneck from "bottleneck";
 import {
   ConstructorParams,
   ExecuteParameters,
@@ -16,6 +17,7 @@ import {
   updateRateLimiters,
 } from "./rate-limiter";
 import { request } from "./request";
+import { createJobOptions } from "./utils";
 
 const debug = require("debug")("riotratelimiter:main");
 const debugQ = require("debug")("riotratelimiter:queue");
@@ -119,7 +121,10 @@ export class RiotRateLimiter {
     return;
   }
 
-  async execute(req: ExecuteParameters): Promise<any> {
+  async execute(
+    req: ExecuteParameters,
+    jobOptions?: Bottleneck.JobOptions
+  ): Promise<any> {
     const region = extractRegion(req.url);
     const method = extractMethod(req.url);
 
@@ -131,19 +136,21 @@ export class RiotRateLimiter {
     const limiter = this.rateLimiters?.[region]?.[method];
     if (!limiter) {
       debug("No limiters setup yet, sending inital request");
-      return this.executeRequest({ req, region, method });
+      return this.executeRequest(
+        { req, region, method },
+        createJobOptions(jobOptions)
+      );
     }
 
-    return limiter.main.schedule({ id: Date.now() }, () =>
+    return limiter.main.schedule(createJobOptions(jobOptions), () =>
       this.executeRequest({ req, region, method })
     );
   }
 
-  private executeRequest({
-    req,
-    region,
-    method,
-  }: ExecuteRequestParameters): Promise<any> {
+  private executeRequest(
+    { req, region, method }: ExecuteRequestParameters,
+    jobOptions?: Bottleneck.JobOptions
+  ): Promise<any> {
     return new Promise((resolve, reject) => {
       request(req)
         .then(({ rateLimits, json }) => {
@@ -162,7 +169,7 @@ export class RiotRateLimiter {
             rateLimits: RateLimits;
             status: number;
             statusText: string;
-            resp: any;
+            resp: Response;
           }) => {
             if (status !== 429) return reject(resp);
 
@@ -177,7 +184,7 @@ export class RiotRateLimiter {
             setTimeout(() => {
               resolve(
                 this.rateLimiters[region][method].main.schedule(
-                  { id: Date.now() },
+                  jobOptions,
                   () => this.executeRequest({ req, region, method })
                 )
               );
