@@ -7,7 +7,7 @@ export const createRateLimiters = (
     limits: string;
     counts: string;
   },
-  id?: string
+  opts: Bottleneck.ConstructorOptions
 ): { limiters?: Bottleneck[]; main?: Bottleneck } => {
   const { limits, counts } = rateLimits;
   const limitsArr = limits.split(",");
@@ -19,7 +19,8 @@ export const createRateLimiters = (
     (limit: string, index) =>
       new Bottleneck(
         createRateLimiterOptions(limit, countsArr[index], {
-          id: `${id || ""}_${index}`,
+          ...opts,
+          id: `${opts.id}_${index}`,
         })
       )
   );

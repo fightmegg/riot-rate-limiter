@@ -6,7 +6,7 @@
 
 > Node.JS Rate Limiter for [Riot Games API](https://developer.riotgames.com)
 
-#### **[Wiki](https://github.com/fightmegg/riot-rate-limiter/wiki)**
+**[Wiki](https://github.com/fightmegg/riot-rate-limiter/wiki)**
 
 ### Features
 
@@ -15,24 +15,24 @@
 - [Request synchronization](https://github.com/fightmegg/riot-rate-limiter/wiki/Request-Synchronization)
 - [Request prioritization](https://github.com/fightmegg/riot-rate-limiter/wiki/Request-Priorities)
 - [429 response](https://github.com/fightmegg/riot-rate-limiter/wiki/429-Reponses) retrying
+- [Concurrent requests](https://github.com/fightmegg/riot-rate-limiter/wiki/Concurrency)
 - Built specifically for [Riot Games Rate Limiting](https://web.archive.org/web/20190629194440/https://developer.riotgames.com/rate-limiting.html)
 
 ## Contents
 
-- [Riot Rate Limiter](#riot-rate-limiter)  
-   - [**Wiki**](#wiki)
-  - [Features](#features)
+- [Riot Rate Limiter](#riot-rate-limiter)
+    - [Features](#features)
   - [Contents](#contents)
   - [Installation](#installation)
   - [Usage](#usage)
-  - [Endpoints Covered](#endpoints-covered)
   - [API](#api)
-    - [`.execute`](#execute)
-    - [`.rateLimiters`](#ratelimiters)
+      - [`constructor`](#constructor)
+      - [`.execute`](#execute)
+      - [`.rateLimiters`](#ratelimiters)
   - [Helpers](#helpers)
-    - [extractRegion](#extractregion)
-    - [extractMethod](#extractmethod)
-    - [METHODS & HOST](#methods--host)
+      - [extractRegion](#extractregion)
+      - [extractMethod](#extractmethod)
+      - [METHODS & HOST](#methods--host)
   - [Debugging](#debugging)
   - [Testing](#testing)
   - [Maintainers](#maintainers)
@@ -75,11 +75,16 @@ limiter
   });
 ```
 
-## Endpoints Covered
-
-Currently supports all endpoints listed on the [Riot Games API](https://developer.riotgames.com/apis) docs
-
 ## API
+
+#### `constructor`
+
+```ts
+new RiotRateLimiter({
+  debug: boolean = false,
+  concurrency: number = 1,
+});
+```
 
 #### `.execute`
 
@@ -98,7 +103,7 @@ limiter.execute({
 );
 ```
 
-The second argument is an optional, which allows you to specify [JobOptions](https://github.com/SGrondin/bottleneck#job-options) such as job priority and unique ID for log identification. The weight of a job cannot be changed from the value of `1` no matter what you pass in.
+The second argument is optional, which allows you to specify [JobOptions](https://github.com/SGrondin/bottleneck#job-options) such as job priority and unique ID for log identification. The weight of a job cannot be changed from the value of `1` no matter what you pass in.
 
 #### `.rateLimiters`
 
