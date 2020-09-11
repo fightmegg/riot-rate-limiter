@@ -16,6 +16,7 @@
 - [Request prioritization](https://github.com/fightmegg/riot-rate-limiter/wiki/Request-Priorities)
 - [429 response](https://github.com/fightmegg/riot-rate-limiter/wiki/429-Reponses) retrying
 - [Concurrent requests](https://github.com/fightmegg/riot-rate-limiter/wiki/Concurrency)
+- [429 Retry limit](https://github.com/fightmegg/riot-rate-limiter/wiki/Max-Retries)
 - Built specifically for [Riot Games Rate Limiting](https://web.archive.org/web/20190629194440/https://developer.riotgames.com/rate-limiting.html)
 
 ## Contents
@@ -83,6 +84,8 @@ limiter
 new RiotRateLimiter({
   debug: boolean = false,
   concurrency: number = 1,
+  retryAfterDefault: number = 5000,
+  retryCount: number = 4,
 });
 ```
 
@@ -92,7 +95,7 @@ This library uses [node-fetch](https://github.com/node-fetch/node-fetch) underne
 
 Any responses that are not 2xx or 429 will be thrown, and must be caught.
 
-We will **auto-retry** `429` responses, utilising the `Retry-After` header to respect the API.
+We will **auto-retry** `429` responses, up until the retryCount limit is hit (defaults to `4`), utilising the `Retry-After` header to respect the API.
 
 ```ts
 limiter.execute({

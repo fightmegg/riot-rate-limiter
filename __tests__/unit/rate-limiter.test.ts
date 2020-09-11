@@ -23,37 +23,53 @@ describe("rate-limiter", () => {
 
   describe("createRateLimitRetry", () => {
     test("it should return a function", () => {
-      expect(createRateLimitRetry([LimitType.APPLICATION])).toBeInstanceOf(
-        Function
-      );
+      expect(
+        createRateLimitRetry([LimitType.APPLICATION], 2000, 2)
+      ).toBeInstanceOf(Function);
     });
 
     test("it should return undefined if status !== 429", () => {
-      const retry = createRateLimitRetry([LimitType.APPLICATION]);
-      expect(retry({ status: 400 })).toBeUndefined();
+      const retry = createRateLimitRetry([LimitType.APPLICATION], 2000, 2);
+      const jobInfo = { retryCount: 0 } as Bottleneck.EventInfoRetryable;
+      expect(retry({ status: 400 }, jobInfo)).toBeUndefined();
     });
 
-    test("it should return undefined if status === 429 but limitType does not exist", () => {
-      const retry = createRateLimitRetry([LimitType.APPLICATION]);
-      expect(retry({ status: 429, limitType: "something" })).toBeUndefined();
-    });
-
-    test("it should return undefined if status === 429 but limitType does not match", () => {
-      const retry = createRateLimitRetry([LimitType.APPLICATION]);
-      expect(
-        retry({ status: 429, limitType: LimitType.METHOD })
-      ).toBeUndefined();
+    test("it should return retryAfterDefault if status === 429 but limitType does not exist", () => {
+      const retry = createRateLimitRetry([LimitType.APPLICATION], 2000, 2);
+      const jobInfo = { retryCount: 0 } as Bottleneck.EventInfoRetryable;
+      expect(retry({ status: 429, limitType: "something" }, jobInfo)).toEqual(
+        2000
+      );
     });
 
     test("it should return retryAfter if status === 429 & limitType matches", () => {
-      const retry = createRateLimitRetry([LimitType.APPLICATION]);
+      const retry = createRateLimitRetry([LimitType.APPLICATION], 2000, 2);
+      const jobInfo = { retryCount: 0 } as Bottleneck.EventInfoRetryable;
       expect(
-        retry({
-          status: 429,
-          limitType: LimitType.APPLICATION,
-          retryAfter: 5000,
-        })
+        retry(
+          {
+            status: 429,
+            limitType: LimitType.APPLICATION,
+            retryAfter: 5000,
+          },
+          jobInfo
+        )
       ).toEqual(5000);
+    });
+
+    test("it should return undefined if retryCount has passed retryLimit", () => {
+      const retry = createRateLimitRetry([LimitType.APPLICATION], 2000, 2);
+      const jobInfo = { retryCount: 1 } as Bottleneck.EventInfoRetryable;
+      expect(
+        retry(
+          {
+            status: 429,
+            limitType: LimitType.APPLICATION,
+            retryAfter: 5000,
+          },
+          jobInfo
+        )
+      ).toBeUndefined();
     });
   });
 
