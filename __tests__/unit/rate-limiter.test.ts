@@ -42,13 +42,6 @@ describe("rate-limiter", () => {
       );
     });
 
-    // test("it should return undefined if status === 429 but limitType does not match", () => {
-    //   const retry = createRateLimitRetry([LimitType.APPLICATION]);
-    //   expect(
-    //     retry({ status: 429, limitType: LimitType.METHOD })
-    //   ).toBeUndefined();
-    // });
-
     test("it should return retryAfter if status === 429 & limitType matches", () => {
       const retry = createRateLimitRetry([LimitType.APPLICATION], 2000, 2);
       const jobInfo = { retryCount: 0 } as Bottleneck.EventInfoRetryable;
