@@ -6,7 +6,7 @@
 
 > Node.JS Rate Limiter for [Riot Games API](https://developer.riotgames.com)
 
-#### **[Wiki](https://github.com/fightmegg/riot-rate-limiter/wiki)**
+**[Wiki](https://github.com/fightmegg/riot-rate-limiter/wiki)**
 
 ### Features
 
@@ -15,18 +15,18 @@
 - [Request synchronization](https://github.com/fightmegg/riot-rate-limiter/wiki/Request-Synchronization)
 - [Request prioritization](https://github.com/fightmegg/riot-rate-limiter/wiki/Request-Priorities)
 - [429 response](https://github.com/fightmegg/riot-rate-limiter/wiki/429-Reponses) retrying
+- [Concurrent requests](https://github.com/fightmegg/riot-rate-limiter/wiki/Concurrency)
 - Built specifically for [Riot Games Rate Limiting](https://web.archive.org/web/20190629194440/https://developer.riotgames.com/rate-limiting.html)
 
 ## Contents
 
 - [Riot Rate Limiter](#riot-rate-limiter)
-      - [**Wiki**](#wiki)
     - [Features](#features)
   - [Contents](#contents)
   - [Installation](#installation)
   - [Usage](#usage)
-  - [Endpoints Covered](#endpoints-covered)
   - [API](#api)
+      - [`constructor`](#constructor)
       - [`.execute`](#execute)
       - [`.rateLimiters`](#ratelimiters)
   - [Helpers](#helpers)
@@ -75,11 +75,16 @@ limiter
   });
 ```
 
-## Endpoints Covered
-
-Currently supports all endpoints listed on the [Riot Games API](https://developer.riotgames.com/apis) docs
-
 ## API
+
+#### `constructor`
+
+```ts
+new RiotRateLimiter({
+  debug: boolean = false,
+  concurrency: number = 1,
+});
+```
 
 #### `.execute`
 
