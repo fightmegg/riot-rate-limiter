@@ -6,7 +6,8 @@
   "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
   "scripts": {
-    "test": "jest",
+    "test:e2e": "jest __tests__/e2e",
+    "test": "jest __tests__/unit",
     "version": "npm run build",
     "build": "tsc && tsc -p ./tsconfig.cjs.json",
     "lint": "eslint ./src/ --ext .ts --quiet",

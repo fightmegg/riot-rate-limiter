@@ -111,7 +111,7 @@ describe("@fightmegg/riot-rate-limtier", () => {
         .reply(200, { summonerName: "Demos Kratos" }, rateLimitHeaders);
       const url = `${host}${path}`;
 
-      const resp = await limiter.execute({ url, options: {} });
+      await limiter.execute({ url, options: {} });
       expect(scope.isDone()).toBeTrue();
       expect(limiter.rateLimiters?.euw1?.limiters).toHaveLength(2);
       expect(limiter.rateLimiters?.euw1?.main).toBeInstanceOf(Bottleneck);
