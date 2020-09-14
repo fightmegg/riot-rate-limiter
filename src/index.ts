@@ -30,11 +30,14 @@ export class RiotRateLimiter {
     concurrency: number;
     retryAfterDefault: number;
     retryCount: number;
+    redis?: Bottleneck.RedisConnectionOptions;
+    datastore: "local" | "redis" | "ioredis";
   } = {
     debug: false,
     concurrency: 1,
     retryAfterDefault: 5000,
     retryCount: 4,
+    datastore: "local",
   };
   readonly rateLimiters: { [key: string]: any } = {};
 
@@ -46,6 +49,15 @@ export class RiotRateLimiter {
   private checkConcurrency() {
     if (this.configuration.concurrency > 10)
       console.warn("Concurrency > 10 is quite high, be careful!");
+  }
+
+  private getRateLimiterOptions(id: string): Bottleneck.ConstructorOptions {
+    return {
+      id,
+      maxConcurrent: this.configuration.concurrency,
+      datastore: this.configuration.datastore,
+      clientOptions: this.configuration.redis || null,
+    };
   }
 
   private setupRateLimiters(
@@ -60,7 +72,7 @@ export class RiotRateLimiter {
           limits: rateLimits.appLimits,
           counts: rateLimits.appCounts,
         },
-        { id: region, maxConcurrent: this.configuration.concurrency }
+        this.getRateLimiterOptions(region)
       );
       this.rateLimiters[region].main.on(
         "failed",
@@ -79,10 +91,7 @@ export class RiotRateLimiter {
           limits: rateLimits.methodLimits,
           counts: rateLimits.methodCounts,
         },
-        {
-          id: `${region}_${method}`,
-          maxConcurrent: this.configuration.concurrency,
-        }
+        this.getRateLimiterOptions(`${region}_${method}`)
       );
       this.rateLimiters[region][method].main.on(
         "failed",
