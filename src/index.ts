@@ -31,7 +31,7 @@ export class RiotRateLimiter {
     retryAfterDefault: number;
     retryCount: number;
     redis?: Bottleneck.RedisConnectionOptions;
-    datastore: "local" | "redis" | "ioredis";
+    datastore: "local" | "ioredis";
   } = {
     debug: false,
     concurrency: 1,
@@ -140,6 +140,7 @@ export class RiotRateLimiter {
     method: string,
     rateLimits: RateLimits
   ): Promise<void> {
+    debug("Syncing Rate Limiters", region, method);
     if (this.rateLimiters[region]?.[method]) {
       this.rateLimiters[region].limiters = await synchronizeRateLimiters(
         this.rateLimiters[region].limiters,

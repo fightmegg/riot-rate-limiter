@@ -87,8 +87,8 @@ new RiotRateLimiter({
   concurrency: number = 1,
   retryAfterDefault: number = 5000,
   retryCount: number = 4,
-  datastore: 'local' | 'redis' | 'ioredis' = 'local'
-  redis?: RedisConnectionOptions = null
+  datastore: 'local' | 'ioredis' = 'local'
+  redis?: RedisConnectionOptions | RedisConnectionString = null
 });
 ```
 
