@@ -17,6 +17,7 @@
 - [429 response](https://github.com/fightmegg/riot-rate-limiter/wiki/429-Reponses) retrying
 - [Concurrent requests](https://github.com/fightmegg/riot-rate-limiter/wiki/Concurrency)
 - [429 Retry limit](https://github.com/fightmegg/riot-rate-limiter/wiki/Max-Retries)
+- [Multi-instance / Cluster](<https://github.com/fightmegg/riot-rate-limiter/wiki/Multi-Instance---Cluster-(Redis)>) support
 - Built specifically for [Riot Games Rate Limiting](https://web.archive.org/web/20190629194440/https://developer.riotgames.com/rate-limiting.html)
 
 ## Contents
@@ -86,6 +87,8 @@ new RiotRateLimiter({
   concurrency: number = 1,
   retryAfterDefault: number = 5000,
   retryCount: number = 4,
+  datastore: 'local' | 'redis' | 'ioredis' = 'local'
+  redis?: RedisConnectionOptions = null
 });
 ```
 
