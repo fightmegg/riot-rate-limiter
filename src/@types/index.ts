@@ -7,6 +7,7 @@ export interface ConstructorParams {
   concurrency?: number;
   retryAfterDefault?: number;
   retryCount?: number;
+  datastore?: "local" | "ioredis";
 }
 
 export interface ExecuteParameters {
