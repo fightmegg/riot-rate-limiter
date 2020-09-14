@@ -61,24 +61,99 @@ export interface RateLimits {
 export const HOST = ":platformId.api.riotgames.com";
 
 export interface METHODS {
-  ACCOUNT: { [key: string]: string };
-  CHAMPION_MASTERY: { [key: string]: string };
-  CHAMPION: { [key: string]: string };
-  CLASH: { [key: string]: string };
-  LEAGUE_EXP: { [key: string]: string };
-  LEAGUE: { [key: string]: string };
-  LOR_RANKED: { [key: string]: string };
-  MATCH: { [key: string]: string };
-  SPECTATOR: { [key: string]: string };
-  SUMMONER: { [key: string]: string };
-  TFT_LEAGUE: { [key: string]: string };
-  TFT_MATCH: { [key: string]: string };
-  TFT_SUMMONER: { [key: string]: string };
-  THIRD_PARTY_CODE: { [key: string]: string };
-  TOURNAMENT_STUB: { [key: string]: string };
-  TOURNAMENT: { [key: string]: string };
-  VAL_CONTENT: { [key: string]: string };
-  VAL_MATCH: { [key: string]: string };
+  ACCOUNT: {
+    GET_BY_PUUID: string;
+    GET_BY_RIOT_ID: string;
+    GET_ACTIVE_SHARD_FOR_PLAYER: string;
+  };
+  CHAMPION_MASTERY: {
+    GET_ALL_CHAMPIONS: string;
+    GET_CHAMPION_MASTERY: string;
+    GET_CHAMPION_MASTERY_SCORE: string;
+  };
+  CHAMPION: {
+    GET_CHAMPION_ROTATIONS: string;
+  };
+  CLASH: {
+    GET_PLAYERS_BY_SUMMONER: string;
+    GET_TEAM: string;
+    GET_TOURNAMENTS: string;
+    GET_TOURNAMENT: string;
+    GET_TOURNAMENT_TEAM: string;
+  };
+  LEAGUE_EXP: {
+    GET_LEAGUE_ENTRIES: string;
+  };
+  LEAGUE: {
+    GET_CHALLENGER_BY_QUEUE: string;
+    GET_ENTRIES_BY_SUMMONER: string;
+    GET_ALL_ENTRIES: string;
+    GET_GRANDMASTER_BY_QUEUE: string;
+    GET_LEAGUE_BY_ID: string;
+    GET_MASTER_BY_QUEUE: string;
+  };
+  LOR_RANKED: {
+    GET_MASTER_TIER: string;
+  };
+  MATCH: {
+    GET_IDS_BY_TOURNAMENT_CODE: string;
+    GET_MATCH_BY_ID: string;
+    GET_MATCH_BY_ID_AND_TOURNAMENT_CODE: string;
+    GET_MATCHLIST_BY_ACCOUNT: string;
+    GET_TIMELINE_BY_MATCH_ID: string;
+  };
+  SPECTATOR: {
+    GET_GAME_BY_SUMMONER_ID: string;
+    GET_FEATURED_GAMES: string;
+  };
+  SUMMONER: {
+    GET_BY_ACCOUNT_ID: string;
+    GET_BY_SUMMONER_NAME: string;
+    GET_BY_PUUID: string;
+    GET_BY_SUMMONER_ID: string;
+  };
+  TFT_LEAGUE: {
+    GET_CHALLENGER: string;
+    GET_ENTRIES_BY_SUMMONER: string;
+    GET_ALL_ENTRIES: string;
+    GET_GRANDMASTER: string;
+    GET_LEAGUE_BY_ID: string;
+    GET_MASTER: string;
+  };
+  TFT_MATCH: {
+    GET_MATCH_IDS_BY_PUUID: string;
+    GET_MATCH_BY_ID: string;
+  };
+  TFT_SUMMONER: {
+    GET_BY_ACCOUNT_ID: string;
+    GET_BY_SUMMONER_NAME: string;
+    GET_BY_PUUID: string;
+    GET_BY_SUMMONER_ID: string;
+  };
+  THIRD_PARTY_CODE: {
+    GET_BY_SUMMONER_ID: string;
+  };
+  TOURNAMENT_STUB: {
+    POST_CREATE_CODES: string;
+    GET_LOBBY_EVENTS_BY_TOURNAMENT_CODE: string;
+    POST_CREATE_PROVIDER: string;
+    POST_CREATE_TOURNAMENT: string;
+  };
+  TOURNAMENT: {
+    POST_CREATE_CODES: string;
+    GET_TOURNAMENT_BY_CODE: string;
+    PUT_TOURNAMENT_CODE: string;
+    GET_LOBBY_EVENTS_BY_TOURNAMENT_CODE: string;
+    POST_CREATE_PROVIDER: string;
+    POST_CREATE_TOURNAMENT: string;
+  };
+  VAL_CONTENT: {
+    GET_CONTENT: string;
+  };
+  VAL_MATCH: {
+    GET_MATCH_BY_ID: string;
+    GET_MATCHLIST_BY_PUUID: string;
+  };
   [key: string]: any;
 }
 
