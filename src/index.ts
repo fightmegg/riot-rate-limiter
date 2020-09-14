@@ -22,7 +22,7 @@ import { createJobOptions } from "./utils";
 const debug = require("debug")("riotratelimiter:main");
 const debugQ = require("debug")("riotratelimiter:queue");
 
-export { extractMethod, extractRegion, METHODS, HOST };
+export { extractMethod, extractRegion, METHODS, HOST, PlatformId };
 
 export class RiotRateLimiter {
   readonly configuration: {
