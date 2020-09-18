@@ -154,6 +154,7 @@ export interface METHODS {
   VAL_MATCH: {
     GET_MATCH_BY_ID: string;
     GET_MATCHLIST_BY_PUUID: string;
+    GET_RECENT_MATCHES_BY_QUEUE: string;
   };
   [key: string]: any;
 }
@@ -262,5 +263,6 @@ export const METHODS: METHODS = {
   VAL_MATCH: {
     GET_MATCH_BY_ID: "/val/match/v1/matches/:matchId",
     GET_MATCHLIST_BY_PUUID: "/val/match/v1/matchlists/by-puuid/:puuid",
+    GET_RECENT_MATCHES_BY_QUEUE: "/val/match/v1/recent-matches/by-queue/:queue",
   },
 };
