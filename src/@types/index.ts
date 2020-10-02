@@ -116,6 +116,7 @@ export interface METHODS {
     GET_BY_SUMMONER_NAME: string;
     GET_BY_PUUID: string;
     GET_BY_SUMMONER_ID: string;
+    GET_BY_ACCESS_TOKEN: string;
   };
   TFT_LEAGUE: {
     GET_CHALLENGER: string;
@@ -222,6 +223,7 @@ export const METHODS: METHODS = {
     GET_FEATURED_GAMES: "/lol/spectator/v4/featured-games",
   },
   SUMMONER: {
+    GET_BY_ACCESS_TOKEN: "/lol/summoner/v4/summoners/me",
     GET_BY_ACCOUNT_ID: "/lol/summoner/v4/summoners/by-account/:accountId",
     GET_BY_SUMMONER_NAME: "/lol/summoner/v4/summoners/by-name/:summonerName",
     GET_BY_PUUID: "/lol/summoner/v4/summoners/by-puuid/:puuid",
