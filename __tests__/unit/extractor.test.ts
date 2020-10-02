@@ -119,8 +119,8 @@ describe("Extractor", () => {
       ],
       // LOR_MATCH
       [
-        "LOR_MATCH.GET_MATCHLIST_BY_PUUID",
-        METHODS.LOR_MATCH.GET_MATCHLIST_BY_PUUID,
+        "LOR_MATCH.GET_MATCH_IDS_BY_PUUID",
+        METHODS.LOR_MATCH.GET_MATCH_IDS_BY_PUUID,
         { puuid: "1234" },
       ],
       [
