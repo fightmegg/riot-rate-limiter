@@ -188,6 +188,11 @@ describe("Extractor", () => {
         METHODS.SUMMONER.GET_BY_SUMMONER_ID,
         { summonerId: "1234" },
       ],
+      [
+        "SUMMONER.GET_BY_ACCESS_TOKEN",
+        METHODS.SUMMONER.GET_BY_ACCESS_TOKEN,
+        {},
+      ],
       // TFT LEAGUE
       ["TFT_LEAGUE.GET_CHALLENGER", METHODS.TFT_LEAGUE.GET_CHALLENGER, {}],
       [
