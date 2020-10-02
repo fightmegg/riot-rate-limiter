@@ -117,6 +117,17 @@ describe("Extractor", () => {
         METHODS.LEAGUE.GET_MASTER_BY_QUEUE,
         { queue: "RANKED_SOLO_5v5" },
       ],
+      // LOR_MATCH
+      [
+        "LOR_MATCH.GET_MATCHLIST_BY_PUUID",
+        METHODS.LOR_MATCH.GET_MATCHLIST_BY_PUUID,
+        { puuid: "1234" },
+      ],
+      [
+        "LOR_MATCH.GET_MATCH_BY_ID",
+        METHODS.LOR_MATCH.GET_MATCH_BY_ID,
+        { matchId: "1234" },
+      ],
       // LOR_RANKED
       ["LOR_RANKED.GET_MASTER_TIER", METHODS.LOR_RANKED.GET_MASTER_TIER, {}],
       // MATCH
