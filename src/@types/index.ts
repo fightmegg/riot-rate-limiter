@@ -93,6 +93,10 @@ export interface METHODS {
     GET_LEAGUE_BY_ID: string;
     GET_MASTER_BY_QUEUE: string;
   };
+  LOR_MATCH: {
+    GET_MATCHLIST_BY_PUUID: string;
+    GET_MATCH_BY_ID: string;
+  };
   LOR_RANKED: {
     GET_MASTER_TIER: string;
   };
@@ -195,6 +199,10 @@ export const METHODS: METHODS = {
       "/lol/league/v4/grandmasterleagues/by-queue/:queue",
     GET_LEAGUE_BY_ID: "/lol/league/v4/leagues/:leagueId",
     GET_MASTER_BY_QUEUE: "/lol/league/v4/masterleagues/by-queue/:queue",
+  },
+  LOR_MATCH: {
+    GET_MATCHLIST_BY_PUUID: "/lor/match/v1/matches/by-puuid/:puuid/ids",
+    GET_MATCH_BY_ID: "/lor/match/v1/matches/:matchId",
   },
   LOR_RANKED: {
     GET_MASTER_TIER: "/lor/ranked/v1/leaderboards",
