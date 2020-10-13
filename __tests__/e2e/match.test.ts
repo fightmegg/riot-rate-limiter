@@ -39,12 +39,43 @@ describe("E2E", () => {
       })}?beginIndex=200`,
       options,
     });
-    console.log("resp", resp);
     expect(resp).toContainAllKeys([
       "startIndex",
       "endIndex",
       "totalGames",
       "matches",
     ]);
+  });
+
+  test("Get MatchList By non-existing Account", async () => {
+    const limiter = new RiotRateLimiter();
+
+    const createHost = compile(HOST, { encode: encodeURIComponent });
+    const createMatchListPath = compile(
+      METHODS.MATCH.GET_MATCHLIST_BY_ACCOUNT,
+      {
+        encode: encodeURIComponent,
+      }
+    );
+
+    const options = {
+      headers: {
+        "X-Riot-Token": riotAPIKey,
+      },
+    };
+
+    try {
+      await limiter.execute({
+        url: `https://${createHost({
+          platformId: PlatformId.EUW1,
+        })}${createMatchListPath({
+          accountId: "12081saslkjsdw9123dasdee",
+        })}?beginIndex=200`,
+        options,
+      });
+    } catch (e) {
+      console.log("ERROR", e);
+      expect(e.statusCode).toEqual(404);
+    }
   });
 });
