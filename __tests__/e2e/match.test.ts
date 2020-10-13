@@ -47,10 +47,13 @@ describe("E2E", () => {
     ]);
   });
 
-  test("Get MatchList By non-existing Account", async () => {
+  test("Get MatchList By Not Found Account", async () => {
     const limiter = new RiotRateLimiter();
 
     const createHost = compile(HOST, { encode: encodeURIComponent });
+    const createAccountPath = compile(METHODS.SUMMONER.GET_BY_SUMMONER_NAME, {
+      encode: encodeURIComponent,
+    });
     const createMatchListPath = compile(
       METHODS.MATCH.GET_MATCHLIST_BY_ACCOUNT,
       {
@@ -63,19 +66,25 @@ describe("E2E", () => {
         "X-Riot-Token": riotAPIKey,
       },
     };
+    const account = await limiter.execute({
+      url: `https://${createHost({
+        platformId: PlatformId.EUW1,
+      })}${createAccountPath({ summonerName: "Demos Kratos" })}`,
+      options,
+    });
 
     try {
       await limiter.execute({
         url: `https://${createHost({
-          platformId: PlatformId.EUW1,
+          platformId: PlatformId.NA1,
         })}${createMatchListPath({
-          accountId: "12081saslkjsdw9123dasdee",
+          accountId: account.accountId,
         })}?beginIndex=200`,
         options,
       });
     } catch (e) {
       console.log("ERROR", e);
-      expect(e.statusCode).toEqual(404);
+      expect(e.resp.status).toEqual(404);
     }
   });
 });
