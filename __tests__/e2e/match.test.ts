@@ -83,8 +83,7 @@ describe("E2E", () => {
         options,
       });
     } catch (e) {
-      console.log("ERROR", e);
-      expect(e.resp.status).toEqual(404);
+      expect(e.status).toEqual(404);
     }
   });
 });
