@@ -39,6 +39,7 @@ describe("E2E", () => {
       })}?beginIndex=200`,
       options,
     });
+    console.log("resp", resp);
     expect(resp).toContainAllKeys([
       "startIndex",
       "endIndex",
