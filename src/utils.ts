@@ -48,8 +48,8 @@ export const secsToMs = (secs: number): number => secs * 1000;
 export const toNumber = (n: string) => Number(n);
 
 export const extractRateLimits = (headers: Headers): RateLimits => ({
-  appLimits: headers.get("X-App-Rate-Limit") || "",
-  appCounts: headers.get("X-App-Rate-Limit-Count") || "",
+  appLimits: headers.get("X-App-Rate-Limit") || "10:10,500:600",
+  appCounts: headers.get("X-App-Rate-Limit-Count") || "1:10,1:600",
   methodLimits: headers.get("X-Method-Rate-Limit") || "",
   methodCounts: headers.get("X-Method-Rate-Limit-Count") || "",
   retryAfter: secsToMs(toNumber(headers.get("Retry-After") || "")),
