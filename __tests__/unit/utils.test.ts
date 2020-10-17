@@ -54,8 +54,8 @@ describe("Utils", () => {
       });
 
       expect(extractRateLimits(headers)).toEqual({
-        appLimits: "",
-        appCounts: "",
+        appLimits: expect.any(String),
+        appCounts: expect.any(String),
         methodLimits: "2000:60",
         methodCounts: "1:1,3:120",
         retryAfter: 0,
@@ -69,8 +69,8 @@ describe("Utils", () => {
       });
 
       expect(extractRateLimits(headers)).toEqual({
-        appLimits: "",
-        appCounts: "",
+        appLimits: expect.any(String),
+        appCounts: expect.any(String),
         methodLimits: "",
         methodCounts: "",
         retryAfter: 5000,
@@ -84,8 +84,8 @@ describe("Utils", () => {
       });
 
       expect(extractRateLimits(headers)).toEqual({
-        appLimits: "",
-        appCounts: "",
+        appLimits: expect.any(String),
+        appCounts: expect.any(String),
         methodLimits: "",
         methodCounts: "",
         retryAfter: 0,
