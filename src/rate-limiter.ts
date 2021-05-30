@@ -30,18 +30,16 @@ export const createRateLimiters = (
   return rateLimiters;
 };
 
-export const createRateLimitRetry = (
-  limitType: LimitType[],
-  retryAfterDefault: number,
-  retryLimit: number
-) => (err: any, jobInfo: Bottleneck.EventInfoRetryable) => {
-  if (jobInfo.retryCount >= retryLimit - 1) return;
-  if (err.status === 429) {
-    if (Array.isArray(limitType) && limitType.includes(err.limitType))
-      return err.retryAfter;
-    else return err.retryAfter || retryAfterDefault;
-  }
-};
+export const createRateLimitRetry =
+  (limitType: LimitType[], retryAfterDefault: number, retryLimit: number) =>
+  (err: any, jobInfo: Bottleneck.EventInfoRetryable) => {
+    if (jobInfo.retryCount >= retryLimit - 1) return;
+    if (err.status === 429) {
+      if (Array.isArray(limitType) && limitType.includes(err.limitType))
+        return err.retryAfter;
+      else return err.retryAfter || retryAfterDefault;
+    }
+  };
 
 export const updateRateLimiters = (
   rateLimiters: Bottleneck[],
