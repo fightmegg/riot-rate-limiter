@@ -11,7 +11,7 @@
     "version": "npm run build",
     "build": "tsc && tsc -p ./tsconfig.cjs.json",
     "lint": "eslint ./src/ --ext .ts --quiet",
-    "prettier": "prettier ./src/ --check"
+    "prettier": "prettier ./src/**/*.ts --check"
   },
   "repository": {
     "type": "git",

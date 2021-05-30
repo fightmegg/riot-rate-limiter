@@ -148,13 +148,12 @@ export class RiotRateLimiter {
         this.rateLimiters[region][method].main.counts()
       );
 
-      this.rateLimiters[region][
-        method
-      ].limiters = await synchronizeRateLimiters(
-        this.rateLimiters[region][method].limiters,
-        { limits: rateLimits.methodLimits, counts: rateLimits.methodCounts },
-        this.rateLimiters[region][method].main.counts()
-      );
+      this.rateLimiters[region][method].limiters =
+        await synchronizeRateLimiters(
+          this.rateLimiters[region][method].limiters,
+          { limits: rateLimits.methodLimits, counts: rateLimits.methodCounts },
+          this.rateLimiters[region][method].main.counts()
+        );
     }
     return;
   }
