@@ -77,14 +77,9 @@ export const synchronizeRateLimiters = async (
           limitsArr[index],
           countsArr[index]
         );
-        const rateLimitsLeftFromRiot =
-          (newRateLimits.reservoirRefreshAmount || 0) -
-          (newRateLimits.reservoir || 0);
+        const rateLimitsLeftFromRiot = newRateLimits.reservoir || 0;
+        const newReservoir = rateLimitsLeftFromRiot - requestsInFlight;
 
-        const newReservoir = Math.min(
-          currentReservoir,
-          rateLimitsLeftFromRiot - requestsInFlight
-        );
         limiter.updateSettings({ reservoir: newReservoir });
         return limiter;
       }
