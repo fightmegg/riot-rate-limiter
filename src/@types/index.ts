@@ -107,6 +107,11 @@ export interface METHODS {
     GET_MATCHLIST_BY_ACCOUNT: string;
     GET_TIMELINE_BY_MATCH_ID: string;
   };
+  MATCH_V5: {
+    GET_IDS_BY_PUUID: string;
+    GET_MATCH_BY_ID: string;
+    GET_MATCH_TIMELINE_BY_ID: string;
+  };
   SPECTATOR: {
     GET_GAME_BY_SUMMONER_ID: string;
     GET_FEATURED_GAMES: string;
@@ -216,6 +221,11 @@ export const METHODS: METHODS = {
       "/lol/match/v4/matches/:matchId/by-tournament-code/:tournamentCode",
     GET_MATCHLIST_BY_ACCOUNT: "/lol/match/v4/matchlists/by-account/:accountId",
     GET_TIMELINE_BY_MATCH_ID: "/lol/match/v4/timelines/by-match/:matchId",
+  },
+  MATCH_V5: {
+    GET_IDS_BY_PUUID: "/lol/match/v5/matches/by-puuid/:puuid/ids",
+    GET_MATCH_BY_ID: "/lol/match/v5/matches/:matchId",
+    GET_MATCH_TIMELINE_BY_ID: "/lol/match/v5/matches/:matchId/timeline",
   },
   SPECTATOR: {
     GET_GAME_BY_SUMMONER_ID:
