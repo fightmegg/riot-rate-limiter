@@ -223,9 +223,9 @@ export const METHODS: METHODS = {
     GET_TIMELINE_BY_MATCH_ID: "/lol/match/v4/timelines/by-match/:matchId",
   },
   MATCH_V5: {
-    GET_IDS_BY_PUUID: '/lol/match/v5/matches/by-puuid/:puuid/ids',
-    GET_MATCH_BY_ID: '/lol/match/v5/matches/:matchId',
-    GET_MATCH_TIMELINE_BY_ID: '/lol/match/v5/matches/:matchId/timeline'
+    GET_IDS_BY_PUUID: "/lol/match/v5/matches/by-puuid/:puuid/ids",
+    GET_MATCH_BY_ID: "/lol/match/v5/matches/:matchId",
+    GET_MATCH_TIMELINE_BY_ID: "/lol/match/v5/matches/:matchId/timeline",
   },
   SPECTATOR: {
     GET_GAME_BY_SUMMONER_ID:
