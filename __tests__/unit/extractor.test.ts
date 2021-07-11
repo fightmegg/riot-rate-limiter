@@ -156,6 +156,22 @@ describe("Extractor", () => {
         METHODS.MATCH.GET_TIMELINE_BY_MATCH_ID,
         { matchId: "1234" },
       ],
+      // MATCH V5
+      [
+        "MATCH_V5.GET_IDS_BY_PUUID",
+        METHODS.MATCH_V5.GET_IDS_BY_PUUID,
+        { puuid: "1234" },
+      ],
+      [
+        "MATCH_V5.GET_MATCH_BY_ID",
+        METHODS.MATCH_V5.GET_MATCH_BY_ID,
+        { matchId: "1234" },
+      ],
+      [
+        "MATCH_V5.GET_MATCH_TIMELINE_BY_ID",
+        METHODS.MATCH_V5.GET_MATCH_TIMELINE_BY_ID,
+        { matchId: "1234" },
+      ],
       // SPECTATOR
       [
         "SPECTATOR.GET_GAME_BY_SUMMONER_ID",
