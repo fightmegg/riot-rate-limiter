@@ -93,6 +93,14 @@ export interface METHODS {
     GET_LEAGUE_BY_ID: string;
     GET_MASTER_BY_QUEUE: string;
   };
+  LOL_CHALLENGES: {
+    GET_CONFIG: string,
+    GET_PERCENTILES: string,
+    GET_CONFIG_BY_ID: string,
+    GET_LEADERBOARD_BY_ID: string,
+    GET_PERCENTILES_BY_ID: string,
+    GET_PLAYER_DATA_BY_PUUID: string
+  };
   LOR_MATCH: {
     GET_MATCH_IDS_BY_PUUID: string;
     GET_MATCH_BY_ID: string;
@@ -205,6 +213,14 @@ export const METHODS: METHODS = {
       "/lol/league/v4/grandmasterleagues/by-queue/:queue",
     GET_LEAGUE_BY_ID: "/lol/league/v4/leagues/:leagueId",
     GET_MASTER_BY_QUEUE: "/lol/league/v4/masterleagues/by-queue/:queue",
+  },
+  LOL_CHALLENGES: {
+    GET_CONFIG: "/lol/challenges/v1/challenges/config",
+    GET_PERCENTILES: "/lol/challenges/v1/challenges/percentiles",
+    GET_CONFIG_BY_ID: "/lol/challenges/v1/challenges/:challengeId/config",
+    GET_LEADERBOARD_BY_ID: "/lol/challenges/v1/challenges/:challengeId/leaderboards/by-level/:level",
+    GET_PERCENTILES_BY_ID: "/lol/challenges/v1/challenges/:challengeId/percentiles",
+    GET_PLAYER_DATA_BY_PUUID: "/lol/challenges/v1/player-data/:puuid"
   },
   LOR_MATCH: {
     GET_MATCH_IDS_BY_PUUID: "/lor/match/v1/matches/by-puuid/:puuid/ids",
