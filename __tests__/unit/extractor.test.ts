@@ -117,6 +117,33 @@ describe("Extractor", () => {
         METHODS.LEAGUE.GET_MASTER_BY_QUEUE,
         { queue: "RANKED_SOLO_5v5" },
       ],
+      // LOL-CHALLENGES-V1
+      ["LOL_CHALLENGES.GET_CONFIG", METHODS.LOL_CHALLENGES.GET_CONFIG, {}],
+      [
+        "LOL_CHALLENGES.GET_PERCENTILES",
+        METHODS.LOL_CHALLENGES.GET_PERCENTILES,
+        {},
+      ],
+      [
+        "LOL_CHALLENGES.GET_CONFIG_BY_ID",
+        METHODS.LOL_CHALLENGES.GET_CONFIG_BY_ID,
+        { challengeId: "1234" },
+      ],
+      [
+        "LOL_CHALLENGES.GET_LEADERBOARD_BY_ID",
+        METHODS.LOL_CHALLENGES.GET_LEADERBOARD_BY_ID,
+        { challengeId: "1234", level: "1" },
+      ],
+      [
+        "LOL_CHALLENGES.GET_PERCENTILES_BY_ID",
+        METHODS.LOL_CHALLENGES.GET_PERCENTILES_BY_ID,
+        { challengeId: "1234" },
+      ],
+      [
+        "LOL_CHALLENGES.GET_PLAYER_DATA_BY_PUUID",
+        METHODS.LOL_CHALLENGES.GET_PLAYER_DATA_BY_PUUID,
+        { puuid: "1234" },
+      ],
       // LOR_MATCH
       [
         "LOR_MATCH.GET_MATCH_IDS_BY_PUUID",
