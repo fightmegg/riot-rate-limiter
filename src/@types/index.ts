@@ -101,6 +101,9 @@ export interface METHODS {
     GET_PERCENTILES_BY_ID: string,
     GET_PLAYER_DATA_BY_PUUID: string
   };
+  LOL_STATUS: {
+    GET_PLATFORM_DATA: string;
+  };
   LOR_MATCH: {
     GET_MATCH_IDS_BY_PUUID: string;
     GET_MATCH_BY_ID: string;
@@ -221,6 +224,9 @@ export const METHODS: METHODS = {
     GET_LEADERBOARD_BY_ID: "/lol/challenges/v1/challenges/:challengeId/leaderboards/by-level/:level",
     GET_PERCENTILES_BY_ID: "/lol/challenges/v1/challenges/:challengeId/percentiles",
     GET_PLAYER_DATA_BY_PUUID: "/lol/challenges/v1/player-data/:puuid"
+  },
+  LOL_STATUS: {
+    GET_PLATFORM_DATA: "/lol/status/v4/platform-data"
   },
   LOR_MATCH: {
     GET_MATCH_IDS_BY_PUUID: "/lor/match/v1/matches/by-puuid/:puuid/ids",
