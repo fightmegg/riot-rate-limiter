@@ -69,6 +69,7 @@ export interface METHODS {
   };
   CHAMPION_MASTERY: {
     GET_ALL_CHAMPIONS: string;
+    GET_TOP_CHAMPIONS: string;
     GET_CHAMPION_MASTERY: string;
     GET_CHAMPION_MASTERY_SCORE: string;
   };
