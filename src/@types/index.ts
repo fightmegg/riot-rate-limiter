@@ -69,6 +69,7 @@ export interface METHODS {
   };
   CHAMPION_MASTERY: {
     GET_ALL_CHAMPIONS: string;
+    GET_TOP_CHAMPIONS: string;
     GET_CHAMPION_MASTERY: string;
     GET_CHAMPION_MASTERY_SCORE: string;
   };
@@ -179,6 +180,8 @@ export const METHODS: METHODS = {
   CHAMPION_MASTERY: {
     GET_ALL_CHAMPIONS:
       "/lol/champion-mastery/v4/champion-masteries/by-summoner/:summonerId",
+    GET_TOP_CHAMPIONS:
+      "/lol/champion-mastery/v4/champion-masteries/by-summoner/:summonerId/top",
     GET_CHAMPION_MASTERY:
       "/lol/champion-mastery/v4/champion-masteries/by-summoner/:summonerId/by-champion/:championId",
     GET_CHAMPION_MASTERY_SCORE:

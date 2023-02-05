@@ -47,6 +47,11 @@ describe("Extractor", () => {
         { summonerId: "1234" },
       ],
       [
+        "CHAMPION_MASTERY.GET_TOP_CHAMPIONS",
+        METHODS.CHAMPION_MASTERY.GET_TOP_CHAMPIONS,
+        { summonerId: "1234" },
+      ],
+      [
         "CHAMPION_MASTERY.GET_CHAMPION_MASTERY",
         METHODS.CHAMPION_MASTERY.GET_CHAMPION_MASTERY,
         { summonerId: "1234", championId: "53" },
