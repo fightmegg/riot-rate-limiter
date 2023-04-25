@@ -96,7 +96,7 @@ describe("@fightmegg/riot-rate-limtier", () => {
 
       try {
         await limiter.execute({ url, options: {} });
-      } catch (e) {
+      } catch (e: any) {
         expect(scope.isDone()).toBeTrue();
         expect(e.status).toBe(403);
       }

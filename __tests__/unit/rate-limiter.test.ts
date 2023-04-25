@@ -1,6 +1,5 @@
 import { Substitute } from "@fluffy-spoon/substitute";
 import Bottleneck from "bottleneck";
-import { mocked } from "ts-jest/utils";
 import { LimitType } from "../../src/@types";
 import {
   createRateLimiters,
@@ -18,8 +17,8 @@ describe("rate-limiter", () => {
     jest.resetAllMocks();
   });
 
-  const mockedChainRateLimiters = mocked(chainRateLimiters);
-  const mockedCreateRateLimiterOptions = mocked(createRateLimiterOptions);
+  const mockedChainRateLimiters = jest.mocked(chainRateLimiters);
+  const mockedCreateRateLimiterOptions = jest.mocked(createRateLimiterOptions);
 
   describe("createRateLimitRetry", () => {
     test("it should return a function", () => {
