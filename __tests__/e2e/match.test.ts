@@ -54,12 +54,9 @@ describe("E2E", () => {
     const createAccountPath = compile(METHODS.SUMMONER.GET_BY_SUMMONER_NAME, {
       encode: encodeURIComponent,
     });
-    const createMatchListPath = compile(
-      METHODS.MATCH.GET_MATCHLIST_BY_ACCOUNT,
-      {
-        encode: encodeURIComponent,
-      }
-    );
+    const createMatchListPath = compile(METHODS.MATCH_V5.GET_IDS_BY_PUUID, {
+      encode: encodeURIComponent,
+    });
 
     const options = {
       headers: {
@@ -78,7 +75,7 @@ describe("E2E", () => {
         url: `https://${createHost({
           platformId: PlatformId.NA1,
         })}${createMatchListPath({
-          accountId: account.accountId,
+          puuid: account.puuid,
         })}?beginIndex=200`,
         options,
       });
