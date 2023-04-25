@@ -65,17 +65,20 @@ export interface METHODS {
   ACCOUNT: {
     GET_BY_PUUID: string;
     GET_BY_RIOT_ID: string;
+    GET_BY_ACCESS_TOKEN: string;
     GET_ACTIVE_SHARD_FOR_PLAYER: string;
   };
   CHAMPION_MASTERY: {
     GET_ALL_CHAMPIONS: string;
     GET_CHAMPION_MASTERY: string;
+    GET_TOP_CHAMPIONS: string;
     GET_CHAMPION_MASTERY_SCORE: string;
   };
   CHAMPION: {
     GET_CHAMPION_ROTATIONS: string;
   };
   CLASH: {
+    GET_PLAYERS_BY_PUUID: string;
     GET_PLAYERS_BY_SUMMONER: string;
     GET_TEAM: string;
     GET_TOURNAMENTS: string;
@@ -92,6 +95,21 @@ export interface METHODS {
     GET_GRANDMASTER_BY_QUEUE: string;
     GET_LEAGUE_BY_ID: string;
     GET_MASTER_BY_QUEUE: string;
+  };
+  LOL_CHALLENGES: {
+    GET_CONFIG: string;
+    GET_PERCENTILES: string;
+    GET_CONFIG_BY_ID: string;
+    GET_LEADERBOARD_BY_ID: string;
+    GET_PERCENTILES_BY_ID: string;
+    GET_PLAYER_DATA_BY_PUUID: string;
+  };
+  LOR_DECK: {
+    GET_DECKS_FOR_PLAYER: string;
+    POST_CREATE_DECK_FOR_PLAYER: string;
+  };
+  LOR_INVENTORY: {
+    GET_CARDS_OWNED_BY_PLAYER: string;
   };
   LOR_MATCH: {
     GET_MATCH_IDS_BY_PUUID: string;
@@ -117,6 +135,7 @@ export interface METHODS {
     GET_FEATURED_GAMES: string;
   };
   SUMMONER: {
+    GET_BY_RSO_PUUID: string;
     GET_BY_ACCOUNT_ID: string;
     GET_BY_SUMMONER_NAME: string;
     GET_BY_PUUID: string;
@@ -130,6 +149,7 @@ export interface METHODS {
     GET_GRANDMASTER: string;
     GET_LEAGUE_BY_ID: string;
     GET_MASTER: string;
+    GET_TOP_RATED_LADDER_BY_QUEUE: string;
   };
   TFT_MATCH: {
     GET_MATCH_IDS_BY_PUUID: string;
@@ -138,6 +158,7 @@ export interface METHODS {
   TFT_SUMMONER: {
     GET_BY_ACCOUNT_ID: string;
     GET_BY_SUMMONER_NAME: string;
+    GET_BY_ACCESS_TOKEN: string;
     GET_BY_PUUID: string;
     GET_BY_SUMMONER_ID: string;
   };
@@ -166,6 +187,9 @@ export interface METHODS {
     GET_MATCHLIST_BY_PUUID: string;
     GET_RECENT_MATCHES_BY_QUEUE: string;
   };
+  VAL_RANKED: {
+    GET_LEADERBOARD_BY_QUEUE: string;
+  };
   [key: string]: any;
 }
 
@@ -173,6 +197,7 @@ export const METHODS: METHODS = {
   ACCOUNT: {
     GET_BY_PUUID: "/riot/account/v1/accounts/by-puuid/:puuid",
     GET_BY_RIOT_ID: "/riot/account/v1/accounts/by-riot-id/:gameName/:tagLine",
+    GET_BY_ACCESS_TOKEN: "/riot/account/v1/accounts/me",
     GET_ACTIVE_SHARD_FOR_PLAYER:
       "/riot/account/v1/active-shards/by-game/:game/by-puuid/:puuid",
   },
@@ -181,6 +206,8 @@ export const METHODS: METHODS = {
       "/lol/champion-mastery/v4/champion-masteries/by-summoner/:summonerId",
     GET_CHAMPION_MASTERY:
       "/lol/champion-mastery/v4/champion-masteries/by-summoner/:summonerId/by-champion/:championId",
+    GET_TOP_CHAMPIONS:
+      "/lol/champion-mastery/v4/champion-masteries/by-summoner/:summonerId/top",
     GET_CHAMPION_MASTERY_SCORE:
       "/lol/champion-mastery/v4/scores/by-summoner/:summonerId",
   },
@@ -188,6 +215,7 @@ export const METHODS: METHODS = {
     GET_CHAMPION_ROTATIONS: "/lol/platform/v3/champion-rotations",
   },
   CLASH: {
+    GET_PLAYERS_BY_PUUID: "/lol/clash/v1/players/by-puuid/:puuid",
     GET_PLAYERS_BY_SUMMONER: "/lol/clash/v1/players/by-summoner/:summonerId",
     GET_TEAM: "/lol/clash/v1/teams/:teamId",
     GET_TOURNAMENTS: "/lol/clash/v1/tournaments",
@@ -205,6 +233,23 @@ export const METHODS: METHODS = {
       "/lol/league/v4/grandmasterleagues/by-queue/:queue",
     GET_LEAGUE_BY_ID: "/lol/league/v4/leagues/:leagueId",
     GET_MASTER_BY_QUEUE: "/lol/league/v4/masterleagues/by-queue/:queue",
+  },
+  LOL_CHALLENGES: {
+    GET_CONFIG: "/lol/challenges/v1/challenges/config",
+    GET_PERCENTILES: "/lol/challenges/v1/challenges/percentiles",
+    GET_CONFIG_BY_ID: "/lol/challenges/v1/challenges/:challengeId/config",
+    GET_LEADERBOARD_BY_ID:
+      "/lol/challenges/v1/challenges/:challengeId/leaderboards/by-level/:level",
+    GET_PERCENTILES_BY_ID:
+      "/lol/challenges/v1/challenges/:challengeId/percentiles",
+    GET_PLAYER_DATA_BY_PUUID: "/lol/challenges/v1/player-data/:puuid",
+  },
+  LOR_DECK: {
+    GET_DECKS_FOR_PLAYER: "/lor/deck/v1/decks/me",
+    POST_CREATE_DECK_FOR_PLAYER: "/lor/deck/v1/decks/me",
+  },
+  LOR_INVENTORY: {
+    GET_CARDS_OWNED_BY_PLAYER: "/lor/inventory/v1/cards/me",
   },
   LOR_MATCH: {
     GET_MATCH_IDS_BY_PUUID: "/lor/match/v1/matches/by-puuid/:puuid/ids",
@@ -233,6 +278,7 @@ export const METHODS: METHODS = {
     GET_FEATURED_GAMES: "/lol/spectator/v4/featured-games",
   },
   SUMMONER: {
+    GET_BY_RSO_PUUID: "/fulfillment/v1/summoners/by-puuid/:rsoPuuid",
     GET_BY_ACCESS_TOKEN: "/lol/summoner/v4/summoners/me",
     GET_BY_ACCOUNT_ID: "/lol/summoner/v4/summoners/by-account/:accountId",
     GET_BY_SUMMONER_NAME: "/lol/summoner/v4/summoners/by-name/:summonerName",
@@ -246,6 +292,7 @@ export const METHODS: METHODS = {
     GET_GRANDMASTER: "/tft/league/v1/grandmaster",
     GET_LEAGUE_BY_ID: "/tft/league/v1/leagues/:leagueId",
     GET_MASTER: "/tft/league/v1/master",
+    GET_TOP_RATED_LADDER_BY_QUEUE: "/tft/league/v1/rated-ladders/:queue/top",
   },
   TFT_MATCH: {
     GET_MATCH_IDS_BY_PUUID: "/tft/match/v1/matches/by-puuid/:puuid/ids",
@@ -255,6 +302,7 @@ export const METHODS: METHODS = {
     GET_BY_ACCOUNT_ID: "/tft/summoner/v1/summoners/by-account/:accountId",
     GET_BY_SUMMONER_NAME: "/tft/summoner/v1/summoners/by-name/:summonerName",
     GET_BY_PUUID: "/tft/summoner/v1/summoners/by-puuid/:puuid",
+    GET_BY_ACCESS_TOKEN: "/tft/summoner/v1/summoners/me",
     GET_BY_SUMMONER_ID: "/tft/summoner/v1/summoners/:summonerId",
   },
   THIRD_PARTY_CODE: {
@@ -284,5 +332,8 @@ export const METHODS: METHODS = {
     GET_MATCH_BY_ID: "/val/match/v1/matches/:matchId",
     GET_MATCHLIST_BY_PUUID: "/val/match/v1/matchlists/by-puuid/:puuid",
     GET_RECENT_MATCHES_BY_QUEUE: "/val/match/v1/recent-matches/by-queue/:queue",
+  },
+  VAL_RANKED: {
+    GET_LEADERBOARD_BY_QUEUE: "/val/ranked/v1/leaderboards/by-act/:actId",
   },
 };
