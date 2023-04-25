@@ -35,6 +35,7 @@ describe("Extractor", () => {
         METHODS.ACCOUNT.GET_BY_RIOT_ID,
         { gameName: "Demos Kratos", tagLine: "EUW" },
       ],
+      ["ACCOUNT.GET_BY_ACCESS_TOKEN", METHODS.ACCOUNT.GET_BY_ACCESS_TOKEN, {}],
       [
         "ACCOUNT.GET_ACTIVE_SHARD_FOR_PLAYER",
         METHODS.ACCOUNT.GET_ACTIVE_SHARD_FOR_PLAYER,
@@ -52,6 +53,11 @@ describe("Extractor", () => {
         { summonerId: "1234", championId: "53" },
       ],
       [
+        "CHAMPION_MASTERY.GET_TOP_CHAMPIONS",
+        METHODS.CHAMPION_MASTERY.GET_TOP_CHAMPIONS,
+        { summonerId: "1234" },
+      ],
+      [
         "CHAMPION_MASTERY.GET_CHAMPION_MASTERY_SCORE",
         METHODS.CHAMPION_MASTERY.GET_CHAMPION_MASTERY_SCORE,
         { summonerId: "1234" },
@@ -63,6 +69,11 @@ describe("Extractor", () => {
         {},
       ],
       // CLASH
+      [
+        "CLASH.GET_PLAYERS_BY_PUUID",
+        METHODS.CLASH.GET_PLAYERS_BY_PUUID,
+        { puuid: "3333" },
+      ],
       [
         "CLASH.GET_PLAYERS_BY_SUMMONER",
         METHODS.CLASH.GET_PLAYERS_BY_SUMMONER,
@@ -116,6 +127,50 @@ describe("Extractor", () => {
         "LEAGUE.GET_MASTER_BY_QUEUE",
         METHODS.LEAGUE.GET_MASTER_BY_QUEUE,
         { queue: "RANKED_SOLO_5v5" },
+      ],
+      // LOL-CHALLENGES-V1
+      ["LOL_CHALLENGES.GET_CONFIG", METHODS.LOL_CHALLENGES.GET_CONFIG, {}],
+      [
+        "LOL_CHALLENGES.GET_PERCENTILES",
+        METHODS.LOL_CHALLENGES.GET_PERCENTILES,
+        {},
+      ],
+      [
+        "LOL_CHALLENGES.GET_CONFIG_BY_ID",
+        METHODS.LOL_CHALLENGES.GET_CONFIG_BY_ID,
+        { challengeId: "1234" },
+      ],
+      [
+        "LOL_CHALLENGES.GET_LEADERBOARD_BY_ID",
+        METHODS.LOL_CHALLENGES.GET_LEADERBOARD_BY_ID,
+        { challengeId: "1234", level: "1" },
+      ],
+      [
+        "LOL_CHALLENGES.GET_PERCENTILES_BY_ID",
+        METHODS.LOL_CHALLENGES.GET_PERCENTILES_BY_ID,
+        { challengeId: "1234" },
+      ],
+      [
+        "LOL_CHALLENGES.GET_PLAYER_DATA_BY_PUUID",
+        METHODS.LOL_CHALLENGES.GET_PLAYER_DATA_BY_PUUID,
+        { puuid: "1234" },
+      ],
+      // LOR_DECK
+      [
+        "LOR_DECK.GET_DECKS_FOR_PLAYER",
+        METHODS.LOR_DECK.GET_DECKS_FOR_PLAYER,
+        {},
+      ],
+      // [
+      //   "LOR_DECK.POST_CREATE_DECK_FOR_PLAYER",
+      //   METHODS.LOR_DECK.POST_CREATE_DECK_FOR_PLAYER,
+      //   {},
+      // ],
+      // LOR_INVENTORY
+      [
+        "LOR_INVENTORY.GET_CARDS_OWNED_BY_PLAYER",
+        METHODS.LOR_INVENTORY.GET_CARDS_OWNED_BY_PLAYER,
+        {},
       ],
       // LOR_MATCH
       [
@@ -185,6 +240,11 @@ describe("Extractor", () => {
       ],
       // SUMMONER
       [
+        "SUMMONER.GET_BY_RSO_PUUID",
+        METHODS.SUMMONER.GET_BY_RSO_PUUID,
+        { rsoPuuid: "1234" },
+      ],
+      [
         "SUMMONER.GET_BY_ACCOUNT_ID",
         METHODS.SUMMONER.GET_BY_ACCOUNT_ID,
         { accountId: "1234" },
@@ -228,6 +288,11 @@ describe("Extractor", () => {
         { leagueId: "1234" },
       ],
       ["TFT_LEAGUE.GET_MASTER", METHODS.TFT_LEAGUE.GET_MASTER, {}],
+      [
+        "TFT_LEAGUE.GET_TOP_RATED_LADDER_BY_QUEUE",
+        METHODS.TFT_LEAGUE.GET_TOP_RATED_LADDER_BY_QUEUE,
+        { queue: "RANKED_TFT_TURBO" },
+      ],
       // TFT_MATCH
       [
         "TFT_MATCH.GET_MATCH_IDS_BY_PUUID",
@@ -254,6 +319,11 @@ describe("Extractor", () => {
         "TFT_SUMMONER.GET_BY_PUUID",
         METHODS.TFT_SUMMONER.GET_BY_PUUID,
         { puuid: "1234" },
+      ],
+      [
+        "TFT_SUMMONER.GET_BY_ACCESS_TOKEN",
+        METHODS.TFT_SUMMONER.GET_BY_ACCESS_TOKEN,
+        {},
       ],
       [
         "TFT_SUMMONER.GET_BY_SUMMONER_ID",
@@ -330,6 +400,12 @@ describe("Extractor", () => {
         "VAL_MATCH.GET_MATCHLIST_BY_PUUID",
         METHODS.VAL_MATCH.GET_MATCHLIST_BY_PUUID,
         { puuid: "1234" },
+      ],
+      // VAL_RANKED
+      [
+        "VAL_RANKED.GET_LEADERBOARD_BY_QUEUE",
+        METHODS.VAL_RANKED.GET_LEADERBOARD_BY_QUEUE,
+        { actId: "1234" },
       ],
     ])("it extracts the correct method: %s", (method, path, args) => {
       const toPath = compile(path, { encode: encodeURIComponent });
