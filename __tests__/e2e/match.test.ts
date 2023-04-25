@@ -82,7 +82,7 @@ describe("E2E", () => {
         })}?beginIndex=200`,
         options,
       });
-    } catch (e) {
+    } catch (e: any) {
       expect(e.status).toEqual(404);
     }
   });
