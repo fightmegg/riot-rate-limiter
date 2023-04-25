@@ -6,19 +6,16 @@ import { RiotRateLimiter, METHODS, HOST } from "../../src/index";
 const riotAPIKey = process.env.X_RIOT_API_KEY || "";
 
 describe("E2E", () => {
-  test("Get MatchList By Account", async () => {
+  test("Get MatchIds By PUUID", async () => {
     const limiter = new RiotRateLimiter();
 
     const createHost = compile(HOST, { encode: encodeURIComponent });
     const createAccountPath = compile(METHODS.SUMMONER.GET_BY_SUMMONER_NAME, {
       encode: encodeURIComponent,
     });
-    const createMatchListPath = compile(
-      METHODS.MATCH.GET_MATCHLIST_BY_ACCOUNT,
-      {
-        encode: encodeURIComponent,
-      }
-    );
+    const createMatchListPath = compile(METHODS.MATCH_V5.GET_IDS_BY_PUUID, {
+      encode: encodeURIComponent,
+    });
 
     const options = {
       headers: {
@@ -33,33 +30,25 @@ describe("E2E", () => {
     });
     const resp = await limiter.execute({
       url: `https://${createHost({
-        platformId: PlatformId.EUW1,
+        platformId: PlatformId.EUROPE,
       })}${createMatchListPath({
-        accountId: account.accountId,
-      })}?beginIndex=200`,
+        puuid: account.puuid,
+      })}`,
       options,
     });
-    expect(resp).toContainAllKeys([
-      "startIndex",
-      "endIndex",
-      "totalGames",
-      "matches",
-    ]);
+    expect(resp).toBeArray();
   });
 
-  test("Get MatchList By Not Found Account", async () => {
+  test("Get MatchIds By Not Found Account", async () => {
     const limiter = new RiotRateLimiter();
 
     const createHost = compile(HOST, { encode: encodeURIComponent });
     const createAccountPath = compile(METHODS.SUMMONER.GET_BY_SUMMONER_NAME, {
       encode: encodeURIComponent,
     });
-    const createMatchListPath = compile(
-      METHODS.MATCH.GET_MATCHLIST_BY_ACCOUNT,
-      {
-        encode: encodeURIComponent,
-      }
-    );
+    const createMatchListPath = compile(METHODS.MATCH_V5.GET_IDS_BY_PUUID, {
+      encode: encodeURIComponent,
+    });
 
     const options = {
       headers: {
@@ -73,17 +62,14 @@ describe("E2E", () => {
       options,
     });
 
-    try {
-      await limiter.execute({
-        url: `https://${createHost({
-          platformId: PlatformId.NA1,
-        })}${createMatchListPath({
-          accountId: account.accountId,
-        })}?beginIndex=200`,
-        options,
-      });
-    } catch (e) {
-      expect(e.status).toEqual(404);
-    }
+    const resp = await limiter.execute({
+      url: `https://${createHost({
+        platformId: PlatformId.AMERICAS,
+      })}${createMatchListPath({
+        puuid: account.puuid,
+      })}`,
+      options,
+    });
+    expect(resp).toEqual([]);
   });
 });

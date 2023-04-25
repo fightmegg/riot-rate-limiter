@@ -21,7 +21,7 @@ describe("request", () => {
     nock(host).get(path).reply(500);
     try {
       await request({ url: `${host}${path}` });
-    } catch (e) {
+    } catch (e: any) {
       expect(e.status).toBe(500);
       expect(e.rateLimits).toBeInstanceOf(Object);
     }
@@ -31,7 +31,7 @@ describe("request", () => {
     nock(host).get(path).reply(400);
     try {
       await request({ url: `${host}${path}` });
-    } catch (e) {
+    } catch (e: any) {
       expect(e.status).toBe(400);
       expect(e.rateLimits).toBeInstanceOf(Object);
     }
