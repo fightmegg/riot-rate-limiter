@@ -48,6 +48,7 @@ export enum PlatformId {
   TW2 = "tw2",
   VN2 = "vn2",
   ESPORTS = "esports",
+  APAC = "apac",
 }
 
 export enum LimitType {
