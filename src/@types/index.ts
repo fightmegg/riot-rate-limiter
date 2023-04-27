@@ -42,6 +42,12 @@ export enum PlatformId {
   EU = "eu",
   NA = "na",
   LATAM = "latam",
+  PH2 = "ph2",
+  SG2 = "sg2",
+  TH2 = "th2",
+  TW2 = "tw2",
+  VN2 = "vn2",
+  ESPORTS = "esports",
 }
 
 export enum LimitType {
