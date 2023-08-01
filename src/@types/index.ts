@@ -197,10 +197,9 @@ export interface METHODS {
   VAL_RANKED: {
     GET_LEADERBOARD_BY_QUEUE: string;
   };
-  [key: string]: any;
 }
 
-export const METHODS: METHODS = {
+export const METHODS = {
   ACCOUNT: {
     GET_BY_PUUID: "/riot/account/v1/accounts/by-puuid/:puuid",
     GET_BY_RIOT_ID: "/riot/account/v1/accounts/by-riot-id/:gameName/:tagLine",
@@ -343,4 +342,4 @@ export const METHODS: METHODS = {
   VAL_RANKED: {
     GET_LEADERBOARD_BY_QUEUE: "/val/ranked/v1/leaderboards/by-act/:actId",
   },
-};
+} as const satisfies METHODS;
