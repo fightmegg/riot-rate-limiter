@@ -38,6 +38,7 @@
   },
   "devDependencies": {
     "@fluffy-spoon/substitute": "^1.208.0",
+    "@jest/types": "^29.6.1",
     "@types/ioredis": "^4.28.10",
     "@types/jest": "^29.5.3",
     "@types/node": "^18.17.1",
