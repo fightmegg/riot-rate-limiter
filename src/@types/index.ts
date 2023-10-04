@@ -178,7 +178,22 @@ export interface METHODS {
     POST_CREATE_PROVIDER: string;
     POST_CREATE_TOURNAMENT: string;
   };
+  TOURNAMENT_STUB_V5: {
+    POST_CREATE_CODES: string;
+    GET_TOURNAMENT_BY_CODE: string;
+    GET_LOBBY_EVENTS_BY_TOURNAMENT_CODE: string;
+    POST_CREATE_PROVIDER: string;
+    POST_CREATE_TOURNAMENT: string;
+  };
   TOURNAMENT: {
+    POST_CREATE_CODES: string;
+    GET_TOURNAMENT_BY_CODE: string;
+    PUT_TOURNAMENT_CODE: string;
+    GET_LOBBY_EVENTS_BY_TOURNAMENT_CODE: string;
+    POST_CREATE_PROVIDER: string;
+    POST_CREATE_TOURNAMENT: string;
+  };
+  TOURNAMENT_V5: {
     POST_CREATE_CODES: string;
     GET_TOURNAMENT_BY_CODE: string;
     PUT_TOURNAMENT_CODE: string;
@@ -322,6 +337,14 @@ export const METHODS = {
     POST_CREATE_PROVIDER: "/lol/tournament-stub/v4/providers",
     POST_CREATE_TOURNAMENT: "/lol/tournament-stub/v4/tournaments",
   },
+  TOURNAMENT_STUB_V5: {
+    POST_CREATE_CODES: "/lol/tournament-stub/v5/codes",
+    GET_TOURNAMENT_BY_CODE: "/lol/tournament-stub/v5/codes/:tournamentCode",
+    GET_LOBBY_EVENTS_BY_TOURNAMENT_CODE:
+      "/lol/tournament-stub/v5/lobby-events/by-code/:tournamentCode",
+    POST_CREATE_PROVIDER: "/lol/tournament-stub/v5/providers",
+    POST_CREATE_TOURNAMENT: "/lol/tournament-stub/v5/tournaments",
+  },
   TOURNAMENT: {
     POST_CREATE_CODES: "/lol/tournament/v4/codes",
     GET_TOURNAMENT_BY_CODE: "/lol/tournament/v4/codes/:tournamentCode",
@@ -330,6 +353,15 @@ export const METHODS = {
       "/lol/tournament/v4/lobby-events/by-code/:tournamentCode",
     POST_CREATE_PROVIDER: "/lol/tournament/v4/providers",
     POST_CREATE_TOURNAMENT: "/lol/tournament/v4/tournaments",
+  },
+  TOURNAMENT_V5: {
+    POST_CREATE_CODES: "/lol/tournament/v5/codes",
+    GET_TOURNAMENT_BY_CODE: "/lol/tournament/v5/codes/:tournamentCode",
+    PUT_TOURNAMENT_CODE: "/lol/tournament/v5/codes/:tournamentCode",
+    GET_LOBBY_EVENTS_BY_TOURNAMENT_CODE:
+      "/lol/tournament/v5/lobby-events/by-code/:tournamentCode",
+    POST_CREATE_PROVIDER: "/lol/tournament/v5/providers",
+    POST_CREATE_TOURNAMENT: "/lol/tournament/v5/tournaments",
   },
   VAL_CONTENT: {
     GET_CONTENT: "/val/content/v1/contents",
