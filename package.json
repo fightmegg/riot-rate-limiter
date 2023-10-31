@@ -41,7 +41,7 @@
     "@jest/types": "^29.6.1",
     "@types/ioredis": "^4.28.10",
     "@types/jest": "^29.5.3",
-    "@types/node": "^18.17.1",
+    "@types/node": "^20.8.9",
     "@types/node-fetch": "^2.6.4",
     "@typescript-eslint/eslint-plugin": "^6.2.1",
     "@typescript-eslint/parser": "^6.2.1",
