@@ -197,6 +197,7 @@ export interface METHODS {
     POST_CREATE_CODES: string;
     GET_TOURNAMENT_BY_CODE: string;
     PUT_TOURNAMENT_CODE: string;
+    GET_TOURNAMENT_GAME_DETAILS: string;
     GET_LOBBY_EVENTS_BY_TOURNAMENT_CODE: string;
     POST_CREATE_PROVIDER: string;
     POST_CREATE_TOURNAMENT: string;
@@ -358,6 +359,8 @@ export const METHODS = {
     POST_CREATE_CODES: "/lol/tournament/v5/codes",
     GET_TOURNAMENT_BY_CODE: "/lol/tournament/v5/codes/:tournamentCode",
     PUT_TOURNAMENT_CODE: "/lol/tournament/v5/codes/:tournamentCode",
+    GET_TOURNAMENT_GAME_DETAILS:
+      "/lol/tournament/v5/games/by-code/:tournamentCode",
     GET_LOBBY_EVENTS_BY_TOURNAMENT_CODE:
       "/lol/tournament/v5/lobby-events/by-code/:tournamentCode",
     POST_CREATE_PROVIDER: "/lol/tournament/v5/providers",
