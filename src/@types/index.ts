@@ -111,6 +111,9 @@ export interface METHODS {
     GET_PERCENTILES_BY_ID: string;
     GET_PLAYER_DATA_BY_PUUID: string;
   };
+  LOL_STATUS: {
+    GET_PLATFORM_DATA: string;
+  };
   LOR_DECK: {
     GET_DECKS_FOR_PLAYER: string;
     POST_CREATE_DECK_FOR_PLAYER: string;
@@ -265,6 +268,9 @@ export const METHODS = {
     GET_PERCENTILES_BY_ID:
       "/lol/challenges/v1/challenges/:challengeId/percentiles",
     GET_PLAYER_DATA_BY_PUUID: "/lol/challenges/v1/player-data/:puuid",
+  },
+  LOL_STATUS: {
+    GET_PLATFORM_DATA: "/lol/status/v4/platform-data",
   },
   LOR_DECK: {
     GET_DECKS_FOR_PLAYER: "/lor/deck/v1/decks/me",
