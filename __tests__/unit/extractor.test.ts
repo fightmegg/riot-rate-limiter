@@ -45,22 +45,22 @@ describe("Extractor", () => {
       [
         "CHAMPION_MASTERY.GET_ALL_CHAMPIONS",
         METHODS.CHAMPION_MASTERY.GET_ALL_CHAMPIONS,
-        { summonerId: "1234" },
+        { encryptedPUUID: "1234" },
       ],
       [
         "CHAMPION_MASTERY.GET_CHAMPION_MASTERY",
         METHODS.CHAMPION_MASTERY.GET_CHAMPION_MASTERY,
-        { summonerId: "1234", championId: "53" },
+        { encryptedPUUID: "1234", championId: "53" },
       ],
       [
         "CHAMPION_MASTERY.GET_TOP_CHAMPIONS",
         METHODS.CHAMPION_MASTERY.GET_TOP_CHAMPIONS,
-        { summonerId: "1234" },
+        { encryptedPUUID: "1234" },
       ],
       [
         "CHAMPION_MASTERY.GET_CHAMPION_MASTERY_SCORE",
         METHODS.CHAMPION_MASTERY.GET_CHAMPION_MASTERY_SCORE,
-        { summonerId: "1234" },
+        { encryptedPUUID: "1234" },
       ],
       // CHAMPIONS
       [
