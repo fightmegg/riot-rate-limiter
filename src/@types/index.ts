@@ -111,6 +111,9 @@ export interface METHODS {
     GET_PERCENTILES_BY_ID: string;
     GET_PLAYER_DATA_BY_PUUID: string;
   };
+  LOL_STATUS: {
+    GET_PLATFORM_DATA: string;
+  };
   LOR_DECK: {
     GET_DECKS_FOR_PLAYER: string;
     POST_CREATE_DECK_FOR_PLAYER: string;
@@ -225,13 +228,13 @@ export const METHODS = {
   },
   CHAMPION_MASTERY: {
     GET_ALL_CHAMPIONS:
-      "/lol/champion-mastery/v4/champion-masteries/by-summoner/:summonerId",
+      "/lol/champion-mastery/v4/champion-masteries/by-puuid/:encryptedPUUID",
     GET_CHAMPION_MASTERY:
-      "/lol/champion-mastery/v4/champion-masteries/by-summoner/:summonerId/by-champion/:championId",
+      "/lol/champion-mastery/v4/champion-masteries/by-puuid/:encryptedPUUID/by-champion/:championId",
     GET_TOP_CHAMPIONS:
-      "/lol/champion-mastery/v4/champion-masteries/by-summoner/:summonerId/top",
+      "/lol/champion-mastery/v4/champion-masteries/by-puuid/:encryptedPUUID/top",
     GET_CHAMPION_MASTERY_SCORE:
-      "/lol/champion-mastery/v4/scores/by-summoner/:summonerId",
+      "/lol/champion-mastery/v4/scores/by-puuid/:encryptedPUUID",
   },
   CHAMPION: {
     GET_CHAMPION_ROTATIONS: "/lol/platform/v3/champion-rotations",
@@ -265,6 +268,9 @@ export const METHODS = {
     GET_PERCENTILES_BY_ID:
       "/lol/challenges/v1/challenges/:challengeId/percentiles",
     GET_PLAYER_DATA_BY_PUUID: "/lol/challenges/v1/player-data/:puuid",
+  },
+  LOL_STATUS: {
+    GET_PLATFORM_DATA: "/lol/status/v4/platform-data",
   },
   LOR_DECK: {
     GET_DECKS_FOR_PLAYER: "/lor/deck/v1/decks/me",
