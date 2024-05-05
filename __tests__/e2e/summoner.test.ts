@@ -10,19 +10,18 @@ describe("E2E", () => {
     const limiter = new RiotRateLimiter();
 
     const createHost = compile(HOST, { encode: encodeURIComponent });
-    const createPath = compile(METHODS.SUMMONER.GET_BY_SUMMONER_NAME, {
+    const createPath = compile(METHODS.SUMMONER.GET_BY_ACCESS_TOKEN, {
       encode: encodeURIComponent,
     });
     const url = `https://${createHost({
       platformId: PlatformId.EUW1,
-    })}${createPath({ summonerName: "Demos Kratos" })}`;
+    })}${createPath()}`;
     const options = {
       headers: {
         "X-Riot-Token": riotAPIKey,
       },
     };
     const resp = await limiter.execute({ url, options });
-    expect(resp.name).toEqual("Demos Kratos");
     expect(resp).toContainAllKeys([
       "id",
       "accountId",
