@@ -37,8 +37,7 @@ describe("@fightmegg/riot-rate-limtier", () => {
       "X-Method-Rate-Limit-Count": "1:1,3:120",
     };
     const host = "https://euw1.api.riotgames.com";
-    const path =
-      "/lol/champion-mastery/v4/champion-masteries/by-puuid/12345";
+    const path = "/lol/champion-mastery/v4/champion-masteries/by-puuid/12345";
 
     beforeEach(() => {
       jest.resetAllMocks();

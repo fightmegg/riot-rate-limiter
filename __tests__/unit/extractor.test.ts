@@ -250,11 +250,6 @@ describe("Extractor", () => {
         { accountId: "1234" },
       ],
       [
-        "SUMMONER.GET_BY_SUMMONER_NAME",
-        METHODS.SUMMONER.GET_BY_SUMMONER_NAME,
-        { summonerName: "Demos Kratos" },
-      ],
-      [
         "SUMMONER.GET_BY_PUUID",
         METHODS.SUMMONER.GET_BY_PUUID,
         { puuid: "12334" },

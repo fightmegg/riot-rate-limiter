@@ -4,18 +4,19 @@ import { PlatformId } from "../../src/@types";
 import { RiotRateLimiter, METHODS, HOST } from "../../src/index";
 
 const riotAPIKey = process.env.X_RIOT_API_KEY || "";
+const puuid = process.env.PUUID || "";
 
 describe("E2E", () => {
-  test("Get Summoner By SummonerName", async () => {
+  test("Get Summoner By Puuid", async () => {
     const limiter = new RiotRateLimiter();
 
     const createHost = compile(HOST, { encode: encodeURIComponent });
-    const createPath = compile(METHODS.SUMMONER.GET_BY_ACCESS_TOKEN, {
+    const createPath = compile(METHODS.SUMMONER.GET_BY_PUUID, {
       encode: encodeURIComponent,
     });
     const url = `https://${createHost({
       platformId: PlatformId.EUW1,
-    })}${createPath()}`;
+    })}${createPath({ puuid: puuid })}`;
     const options = {
       headers: {
         "X-Riot-Token": riotAPIKey,
@@ -26,7 +27,6 @@ describe("E2E", () => {
       "id",
       "accountId",
       "puuid",
-      "name",
       "profileIconId",
       "revisionDate",
       "summonerLevel",
