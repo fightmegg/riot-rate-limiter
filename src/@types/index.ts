@@ -302,8 +302,8 @@ export const METHODS = {
   },
   SPECTATOR: {
     GET_GAME_BY_SUMMONER_ID:
-      "/lol/spectator/v4/active-games/by-summoner/:summonerId",
-    GET_FEATURED_GAMES: "/lol/spectator/v4/featured-games",
+      "/lol/spectator/v5/active-games/by-summoner/:summonerId",
+    GET_FEATURED_GAMES: "/lol/spectator/v5/featured-games",
   },
   SUMMONER: {
     GET_BY_RSO_PUUID: "/fulfillment/v1/summoners/by-puuid/:rsoPuuid",
