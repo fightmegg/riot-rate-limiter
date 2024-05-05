@@ -1,6 +1,6 @@
 import type { Config } from "@jest/types";
 
-process.env.X_RIOT_API_KEY = "";
+process.env.RIOT_LOL_API_KEY = "661771";
 process.env.PUUID =
   "JjKdGcffExfOCsfimlsP2QOnoXA-lZCJL9jM2KeLkmEw6UGxi1ZguLAEaCs_eOY3zJeyaZO1KmcMDQ";
 const config: Config.InitialOptions = {
