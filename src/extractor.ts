@@ -32,7 +32,7 @@ export const extractMethod = (url: RequestInfo): string | null => {
   let method: string | null = null;
 
   (Object.keys(METHODS) as Array<keyof METHODS>).map((service) => {
-    Object.entries(METHODS[service]).some(([m, p]: [string, any]) => {
+    Object.entries(METHODS[service]).some(([m, p]: [string, string]) => {
       if (matchPath(p, path)) {
         method = `${service}.${m}`;
         return true;
