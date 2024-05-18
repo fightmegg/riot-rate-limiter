@@ -70,11 +70,6 @@ describe("Extractor", () => {
       ],
       // CLASH
       [
-        "CLASH.GET_PLAYERS_BY_PUUID",
-        METHODS.CLASH.GET_PLAYERS_BY_PUUID,
-        { puuid: "3333" },
-      ],
-      [
         "CLASH.GET_PLAYERS_BY_SUMMONER",
         METHODS.CLASH.GET_PLAYERS_BY_SUMMONER,
         { summonerId: "1234" },
@@ -185,31 +180,11 @@ describe("Extractor", () => {
       ],
       // LOR_RANKED
       ["LOR_RANKED.GET_MASTER_TIER", METHODS.LOR_RANKED.GET_MASTER_TIER, {}],
-      // MATCH
+      // LOR_STATUS_V1
       [
-        "MATCH.GET_IDS_BY_TOURNAMENT_CODE",
-        METHODS.MATCH.GET_IDS_BY_TOURNAMENT_CODE,
-        { tournamentCode: 1234 },
-      ],
-      [
-        "MATCH.GET_MATCH_BY_ID",
-        METHODS.MATCH.GET_MATCH_BY_ID,
-        { matchId: "1234" },
-      ],
-      [
-        "MATCH.GET_MATCH_BY_ID_AND_TOURNAMENT_CODE",
-        METHODS.MATCH.GET_MATCH_BY_ID_AND_TOURNAMENT_CODE,
-        { matchId: "1234", tournamentCode: 1234 },
-      ],
-      [
-        "MATCH.GET_MATCHLIST_BY_ACCOUNT",
-        METHODS.MATCH.GET_MATCHLIST_BY_ACCOUNT,
-        { accountId: "12334" },
-      ],
-      [
-        "MATCH.GET_TIMELINE_BY_MATCH_ID",
-        METHODS.MATCH.GET_TIMELINE_BY_MATCH_ID,
-        { matchId: "1234" },
+        "LOR_STATUS_V1.GET_PLATFORM_DATA",
+        METHODS.LOR_STATUS_V1.GET_PLATFORM_DATA,
+        {},
       ],
       // MATCH V5
       [
@@ -226,6 +201,17 @@ describe("Extractor", () => {
         "MATCH_V5.GET_MATCH_TIMELINE_BY_ID",
         METHODS.MATCH_V5.GET_MATCH_TIMELINE_BY_ID,
         { matchId: "1234" },
+      ],
+      // SPECTATOR_TFT_V5
+      [
+        "SPECTATOR_TFT_V5.GET_GAME_BY_PUUID",
+        METHODS.SPECTATOR_TFT_V5.GET_GAME_BY_PUUID,
+        { puuid: "1234" },
+      ],
+      [
+        "SPECTATOR_TFT_V5.GET_FEATURED_GAMES",
+        METHODS.SPECTATOR_TFT_V5.GET_FEATURED_GAMES,
+        {},
       ],
       // SPECTATOR
       [
@@ -299,16 +285,17 @@ describe("Extractor", () => {
         METHODS.TFT_MATCH.GET_MATCH_BY_ID,
         { matchId: "1234" },
       ],
+      // TFT_STATUS_V1
+      [
+        "TFT_STATUS_V1.GET_PLATFORM_DATA",
+        METHODS.TFT_STATUS_V1.GET_PLATFORM_DATA,
+        {},
+      ],
       // TFT_SUMMONER
       [
         "TFT_SUMMONER.GET_BY_ACCOUNT_ID",
         METHODS.TFT_SUMMONER.GET_BY_ACCOUNT_ID,
         { accountId: "1234" },
-      ],
-      [
-        "TFT_SUMMONER.GET_BY_SUMMONER_NAME",
-        METHODS.TFT_SUMMONER.GET_BY_SUMMONER_NAME,
-        { summonerName: "Demos Kratos" },
       ],
       [
         "TFT_SUMMONER.GET_BY_PUUID",
@@ -325,62 +312,66 @@ describe("Extractor", () => {
         METHODS.TFT_SUMMONER.GET_BY_SUMMONER_ID,
         { summonerId: "1234" },
       ],
-      // THIRD_PARTY_CODE
+      // TOURNAMENT_STUB_V5
       [
-        "THIRD_PARTY_CODE.GET_BY_SUMMONER_ID",
-        METHODS.THIRD_PARTY_CODE.GET_BY_SUMMONER_ID,
-        { summonerId: "1234" },
-      ],
-      // TOURNAMENT_STUB
-      [
-        "TOURNAMENT_STUB.POST_CREATE_CODES",
-        METHODS.TOURNAMENT_STUB.POST_CREATE_CODES,
+        "TOURNAMENT_STUB_V5.POST_CREATE_CODES",
+        METHODS.TOURNAMENT_STUB_V5.POST_CREATE_CODES,
         {},
       ],
       [
-        "TOURNAMENT_STUB.GET_LOBBY_EVENTS_BY_TOURNAMENT_CODE",
-        METHODS.TOURNAMENT_STUB.GET_LOBBY_EVENTS_BY_TOURNAMENT_CODE,
+        "TOURNAMENT_STUB_V5.GET_TOURNAMENT_BY_CODE",
+        METHODS.TOURNAMENT_STUB_V5.GET_TOURNAMENT_BY_CODE,
         { tournamentCode: 1234 },
       ],
       [
-        "TOURNAMENT_STUB.POST_CREATE_PROVIDER",
-        METHODS.TOURNAMENT_STUB.POST_CREATE_PROVIDER,
+        "TOURNAMENT_STUB_V5.GET_LOBBY_EVENTS_BY_TOURNAMENT_CODE",
+        METHODS.TOURNAMENT_STUB_V5.GET_LOBBY_EVENTS_BY_TOURNAMENT_CODE,
+        { tournamentCode: 1234 },
+      ],
+      [
+        "TOURNAMENT_STUB_V5.POST_CREATE_PROVIDER",
+        METHODS.TOURNAMENT_STUB_V5.POST_CREATE_PROVIDER,
         {},
       ],
       [
-        "TOURNAMENT_STUB.POST_CREATE_TOURNAMENT",
-        METHODS.TOURNAMENT_STUB.POST_CREATE_TOURNAMENT,
+        "TOURNAMENT_STUB_V5.POST_CREATE_TOURNAMENT",
+        METHODS.TOURNAMENT_STUB_V5.POST_CREATE_TOURNAMENT,
         {},
       ],
-      // TOURNAMENT
+      // TOURNAMENT_V5
       [
-        "TOURNAMENT.POST_CREATE_CODES",
-        METHODS.TOURNAMENT.POST_CREATE_CODES,
+        "TOURNAMENT_V5.POST_CREATE_CODES",
+        METHODS.TOURNAMENT_V5.POST_CREATE_CODES,
         {},
       ],
       [
-        "TOURNAMENT.GET_TOURNAMENT_BY_CODE",
-        METHODS.TOURNAMENT.GET_TOURNAMENT_BY_CODE,
+        "TOURNAMENT_V5.GET_TOURNAMENT_BY_CODE",
+        METHODS.TOURNAMENT_V5.GET_TOURNAMENT_BY_CODE,
         { tournamentCode: 1234 },
       ],
       //   [
-      //     "TOURNAMENT.PUT_TOURNAMENT_CODE",
-      //     METHODS.TOURNAMENT.PUT_TOURNAMENT_CODE,
+      //     "TOURNAMENT_V5.PUT_TOURNAMENT_CODE",
+      //     METHODS.TOURNAMENT_V5.PUT_TOURNAMENT_CODE,
       //     { tournamentCode: 1234 },
       //   ],
       [
-        "TOURNAMENT.GET_LOBBY_EVENTS_BY_TOURNAMENT_CODE",
-        METHODS.TOURNAMENT.GET_LOBBY_EVENTS_BY_TOURNAMENT_CODE,
+        "TOURNAMENT_V5.GET_TOURNAMENT_GAME_DETAILS",
+        METHODS.TOURNAMENT_V5.GET_TOURNAMENT_GAME_DETAILS,
         { tournamentCode: 1234 },
       ],
       [
-        "TOURNAMENT.POST_CREATE_PROVIDER",
-        METHODS.TOURNAMENT.POST_CREATE_PROVIDER,
+        "TOURNAMENT_V5.GET_LOBBY_EVENTS_BY_TOURNAMENT_CODE",
+        METHODS.TOURNAMENT_V5.GET_LOBBY_EVENTS_BY_TOURNAMENT_CODE,
+        { tournamentCode: 1234 },
+      ],
+      [
+        "TOURNAMENT_V5.POST_CREATE_PROVIDER",
+        METHODS.TOURNAMENT_V5.POST_CREATE_PROVIDER,
         {},
       ],
       [
-        "TOURNAMENT.POST_CREATE_TOURNAMENT",
-        METHODS.TOURNAMENT.POST_CREATE_TOURNAMENT,
+        "TOURNAMENT_V5.POST_CREATE_TOURNAMENT",
+        METHODS.TOURNAMENT_V5.POST_CREATE_TOURNAMENT,
         {},
       ],
       // VAL_CONTENT
@@ -401,6 +392,12 @@ describe("Extractor", () => {
         "VAL_RANKED.GET_LEADERBOARD_BY_QUEUE",
         METHODS.VAL_RANKED.GET_LEADERBOARD_BY_QUEUE,
         { actId: "1234" },
+      ],
+      // VAL_STATUS_V1
+      [
+        "VAL_STATUS_V1.GET_PLATFORM_DATA",
+        METHODS.VAL_STATUS_V1.GET_PLATFORM_DATA,
+        {},
       ],
     ])("it extracts the correct method: %s", (method, path, args) => {
       const toPath = compile(path, { encode: encodeURIComponent });
