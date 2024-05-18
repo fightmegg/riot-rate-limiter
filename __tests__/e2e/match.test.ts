@@ -4,13 +4,14 @@ import { PlatformId } from "../../src/@types";
 import { RiotRateLimiter, METHODS, HOST } from "../../src/index";
 
 const riotAPIKey = process.env.X_RIOT_API_KEY || "";
+const puuid = process.env.PUUID || "";
 
 describe("E2E", () => {
   test("Get MatchIds By PUUID", async () => {
     const limiter = new RiotRateLimiter();
 
     const createHost = compile(HOST, { encode: encodeURIComponent });
-    const createAccountPath = compile(METHODS.SUMMONER.GET_BY_SUMMONER_NAME, {
+    const createAccountPath = compile(METHODS.SUMMONER.GET_BY_PUUID, {
       encode: encodeURIComponent,
     });
     const createMatchListPath = compile(METHODS.MATCH_V5.GET_IDS_BY_PUUID, {
@@ -25,7 +26,7 @@ describe("E2E", () => {
     const account = await limiter.execute({
       url: `https://${createHost({
         platformId: PlatformId.EUW1,
-      })}${createAccountPath({ summonerName: "Demos Kratos" })}`,
+      })}${createAccountPath({ puuid: puuid })}`,
       options,
     });
     const resp = await limiter.execute({
@@ -43,7 +44,7 @@ describe("E2E", () => {
     const limiter = new RiotRateLimiter();
 
     const createHost = compile(HOST, { encode: encodeURIComponent });
-    const createAccountPath = compile(METHODS.SUMMONER.GET_BY_SUMMONER_NAME, {
+    const createAccountPath = compile(METHODS.SUMMONER.GET_BY_PUUID, {
       encode: encodeURIComponent,
     });
     const createMatchListPath = compile(METHODS.MATCH_V5.GET_IDS_BY_PUUID, {
@@ -58,7 +59,7 @@ describe("E2E", () => {
     const account = await limiter.execute({
       url: `https://${createHost({
         platformId: PlatformId.EUW1,
-      })}${createAccountPath({ summonerName: "Demos Kratos" })}`,
+      })}${createAccountPath({ puuid: puuid })}`,
       options,
     });
 

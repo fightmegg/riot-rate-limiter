@@ -147,7 +147,6 @@ export interface METHODS {
   SUMMONER: {
     GET_BY_RSO_PUUID: string;
     GET_BY_ACCOUNT_ID: string;
-    GET_BY_SUMMONER_NAME: string;
     GET_BY_PUUID: string;
     GET_BY_SUMMONER_ID: string;
     GET_BY_ACCESS_TOKEN: string;
@@ -302,14 +301,13 @@ export const METHODS = {
   },
   SPECTATOR: {
     GET_GAME_BY_SUMMONER_ID:
-      "/lol/spectator/v4/active-games/by-summoner/:summonerId",
-    GET_FEATURED_GAMES: "/lol/spectator/v4/featured-games",
+      "/lol/spectator/v5/active-games/by-summoner/:summonerId",
+    GET_FEATURED_GAMES: "/lol/spectator/v5/featured-games",
   },
   SUMMONER: {
     GET_BY_RSO_PUUID: "/fulfillment/v1/summoners/by-puuid/:rsoPuuid",
     GET_BY_ACCESS_TOKEN: "/lol/summoner/v4/summoners/me",
     GET_BY_ACCOUNT_ID: "/lol/summoner/v4/summoners/by-account/:accountId",
-    GET_BY_SUMMONER_NAME: "/lol/summoner/v4/summoners/by-name/:summonerName",
     GET_BY_PUUID: "/lol/summoner/v4/summoners/by-puuid/:puuid",
     GET_BY_SUMMONER_ID: "/lol/summoner/v4/summoners/:summonerId",
   },
