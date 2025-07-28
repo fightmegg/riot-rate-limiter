@@ -27,6 +27,7 @@ export enum PlatformId {
   NA1 = "na1",
   LA1 = "la1",
   LA2 = "la2",
+  ME1 = "me1",
   KR = "kr",
   JP1 = "jp1",
   BR1 = "br1",
