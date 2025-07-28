@@ -99,9 +99,9 @@ describe("Extractor", () => {
         { queue: "RANKED_SOLO_5v5" },
       ],
       [
-        "LEAGUE.GET_ENTRIES_BY_SUMMONER",
-        METHODS.LEAGUE.GET_ENTRIES_BY_SUMMONER,
-        { summonerId: "1234" },
+        "LEAGUE.GET_ENTRIES_BY_PUUID",
+        METHODS.LEAGUE.GET_ENTRIES_BY_PUUID,
+        { puuid: "1234" },
       ],
       [
         "LEAGUE.GET_ALL_ENTRIES",
