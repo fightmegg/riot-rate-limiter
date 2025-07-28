@@ -24,8 +24,6 @@ describe("E2E", () => {
     };
     const resp = await limiter.execute({ url, options });
     expect(resp).toContainAllKeys([
-      "id",
-      "accountId",
       "puuid",
       "profileIconId",
       "revisionDate",
