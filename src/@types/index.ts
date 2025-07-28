@@ -96,7 +96,7 @@ export interface METHODS {
   };
   LEAGUE: {
     GET_CHALLENGER_BY_QUEUE: string;
-    GET_ENTRIES_BY_SUMMONER: string;
+    GET_ENTRIES_BY_PUUID: string;
     GET_ALL_ENTRIES: string;
     GET_GRANDMASTER_BY_QUEUE: string;
     GET_LEAGUE_BY_ID: string;
@@ -237,7 +237,7 @@ export const METHODS = {
   },
   LEAGUE: {
     GET_CHALLENGER_BY_QUEUE: "/lol/league/v4/challengerleagues/by-queue/:queue",
-    GET_ENTRIES_BY_SUMMONER: "/lol/league/v4/entries/by-summoner/:summonerId",
+    GET_ENTRIES_BY_PUUID: "/lol/league/v4/entries/by-puuid/:puuid",
     GET_ALL_ENTRIES: "/lol/league/v4/entries/:queue/:tier/:division",
     GET_GRANDMASTER_BY_QUEUE:
       "/lol/league/v4/grandmasterleagues/by-queue/:queue",
